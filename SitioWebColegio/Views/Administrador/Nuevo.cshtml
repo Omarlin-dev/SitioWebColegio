@@ -1,0 +1,32 @@
+﻿@model SitioWebColegio.Models.viewModels.administradorViewModel
+@{
+    ViewBag.Title = "Nuevo";
+}
+
+<h2>Nuevo</h2>
+
+
+<div class="text-center justify-content-center" style="max-width: 50%;">
+    <form action="@Url.Content("~/Administrador/Nuevo")" method="post" class="form-control">
+        <div class="form-control">
+            <label for="nombre">Nombre</label>
+            @Html.TextBoxFor(d => d.nombre, "", new { @class = "form-control" })
+        </div>
+        <div class="form-control">
+            <label for="apellido">Apellido</label>
+            @Html.TextBoxFor(d => d.apellido, "", new { @class = "form-control" })
+        </div>
+        <div class="form-control">
+            <label for="nombreusuario">Nombre de Usuario</label>
+            @Html.TextBoxFor(d => d.nombreusuario, "", new { @class = "form-control" })
+        </div>
+        <div class="form-control">
+            <label for="clave">Clave</label>
+            <input type="password" name="clave" class="form-control" />
+        </div>
+
+        <div class="text-end float-end">
+            <input type="submit" value="Enviar" class="btn btn-outline-success"/>
+        </div>
+    </form>
+</div>

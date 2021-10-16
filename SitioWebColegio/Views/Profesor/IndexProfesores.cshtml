@@ -1,0 +1,35 @@
+﻿@model List<SitioWebColegio.Models.viewModels.profesorViewModel>
+@{
+    ViewBag.Title = "Administrador";
+    Layout = "~/Views/Shared/LayoutProfesor.cshtml";
+}
+
+<h2>Bienvenido Profesor</h2>
+
+<div>
+    <table class="table table-bordered table-hover" style="width: 100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Especialidad</th>
+                <th>Ver mas</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var omodel in Model)
+            {
+
+                <tr>
+                    <td>@omodel.idProfesor</td>
+                    <td>@omodel.nombre</td>
+                    <td>@omodel.apellido</td>
+                    <td>@omodel.especialidad</td>
+                   <td><a href="@Url.Content("~/Profesores/DetalleProfesor?Id=") + @omodel.idProfesor">Detalle</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

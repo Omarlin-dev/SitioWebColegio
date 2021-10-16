@@ -1,0 +1,51 @@
+﻿@model SitioWebColegio.Models.viewModels.profesorViewModel
+
+@{
+    ViewBag.Title = "DetalleProfesor";
+    Layout = "~/Views/Shared/LayoutProfesor.cshtml";
+}
+
+<h2>
+    <a style="float: right; color: blue" href="@Url.Action("IndexProfesor","Profesor")"><i class="fas fa-arrow-alt-circle-left"></i></a>
+    Detalle Profesor
+</h2>
+
+@if (Model.idProfesor <= 0 )
+{
+    <h3>El ID del Profesor no existe</h3>
+}
+
+else
+{
+    <div class="form-group">
+        <label>#: </label>
+        @Model.idProfesor
+    </div>
+
+    <div class="form-group">
+        <label>Nombre: </label>
+        @Model.nombre
+    </div>
+
+    <div class="form-group">
+        <label>Apellido: </label>
+        @Model.apellido
+    </div>
+
+    <div class="form-group">
+        <label>Especialidad: </label>
+        @Model.especialidad
+    </div>
+
+    <div class="form-group">
+        <label>Asignaturas: </label>
+        @foreach(var omodel in Model.asiginaturas)
+        {
+            @omodel.nombre
+        }
+    </div>
+    <br />
+
+   
+
+}

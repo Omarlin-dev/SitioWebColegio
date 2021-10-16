@@ -1,0 +1,480 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbColegioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrador">
+          <Key>
+            <PropertyRef Name="idAdmin" />
+          </Key>
+          <Property Name="idAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="50" />
+          <Property Name="nombreusuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="clave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idRol" Type="int" />
+        </EntityType>
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="idAlumno" />
+          </Key>
+          <Property Name="idAlumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="50" />
+          <Property Name="nombreUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="clave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="bit" />
+          <Property Name="idRol" Type="int" />
+        </EntityType>
+        <EntityType Name="Asignatura">
+          <Key>
+            <PropertyRef Name="idAsignatura" />
+          </Key>
+          <Property Name="idAsignatura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idProfesor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Asignatura_Alumno">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idAsignatura" Type="int" Nullable="false" />
+          <Property Name="idAlumno" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Profesor">
+          <Key>
+            <PropertyRef Name="idProfesor" />
+          </Key>
+          <Property Name="idProfesor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="50" />
+          <Property Name="nombreUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="clave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="especialidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="bit" />
+          <Property Name="idRol" Type="int" />
+        </EntityType>
+        <EntityType Name="Rol_Operacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idRol" Type="int" />
+          <Property Name="idOperacion" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Administrador_Rol_Operacion">
+          <End Role="Rol_Operacion" Type="Self.Rol_Operacion" Multiplicity="0..1" />
+          <End Role="Administrador" Type="Self.Administrador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol_Operacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Administrador">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alumno_Rol_Operacion">
+          <End Role="Rol_Operacion" Type="Self.Rol_Operacion" Multiplicity="0..1" />
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol_Operacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asignatura_Alumno_Alumno">
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="1" />
+          <End Role="Asignatura_Alumno" Type="Self.Asignatura_Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="idAlumno" />
+            </Principal>
+            <Dependent Role="Asignatura_Alumno">
+              <PropertyRef Name="idAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asignatura_Alumno_Asignatura">
+          <End Role="Asignatura" Type="Self.Asignatura" Multiplicity="1" />
+          <End Role="Asignatura_Alumno" Type="Self.Asignatura_Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asignatura">
+              <PropertyRef Name="idAsignatura" />
+            </Principal>
+            <Dependent Role="Asignatura_Alumno">
+              <PropertyRef Name="idAsignatura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asignatura_Profesor">
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="1" />
+          <End Role="Asignatura" Type="Self.Asignatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesor">
+              <PropertyRef Name="idProfesor" />
+            </Principal>
+            <Dependent Role="Asignatura">
+              <PropertyRef Name="idProfesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profesor_Rol_Operacion">
+          <End Role="Rol_Operacion" Type="Self.Rol_Operacion" Multiplicity="0..1" />
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol_Operacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Profesor">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbColegioModelStoreContainer">
+          <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Asignatura" EntityType="Self.Asignatura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Asignatura_Alumno" EntityType="Self.Asignatura_Alumno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profesor" EntityType="Self.Profesor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol_Operacion" EntityType="Self.Rol_Operacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Administrador_Rol_Operacion" Association="Self.FK_Administrador_Rol_Operacion">
+            <End Role="Rol_Operacion" EntitySet="Rol_Operacion" />
+            <End Role="Administrador" EntitySet="Administrador" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alumno_Rol_Operacion" Association="Self.FK_Alumno_Rol_Operacion">
+            <End Role="Rol_Operacion" EntitySet="Rol_Operacion" />
+            <End Role="Alumno" EntitySet="Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asignatura_Alumno_Alumno" Association="Self.FK_Asignatura_Alumno_Alumno">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="Asignatura_Alumno" EntitySet="Asignatura_Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asignatura_Alumno_Asignatura" Association="Self.FK_Asignatura_Alumno_Asignatura">
+            <End Role="Asignatura" EntitySet="Asignatura" />
+            <End Role="Asignatura_Alumno" EntitySet="Asignatura_Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asignatura_Profesor" Association="Self.FK_Asignatura_Profesor">
+            <End Role="Profesor" EntitySet="Profesor" />
+            <End Role="Asignatura" EntitySet="Asignatura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profesor_Rol_Operacion" Association="Self.FK_Profesor_Rol_Operacion">
+            <End Role="Rol_Operacion" EntitySet="Rol_Operacion" />
+            <End Role="Profesor" EntitySet="Profesor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbColegioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="idAlumno" />
+          </Key>
+          <Property Name="idAlumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Boolean" />
+          <Property Name="idRol" Type="Int32" />
+          <NavigationProperty Name="Rol_Operacion" Relationship="Self.FK_Alumno_Rol_Operacion" FromRole="Alumno" ToRole="Rol_Operacion" />
+          <NavigationProperty Name="Asignatura_Alumno" Relationship="dbColegioModel.FK_Asignatura_Alumno_Alumno" FromRole="Alumno" ToRole="Asignatura_Alumno" />
+        </EntityType>
+        <EntityType Name="Asignatura">
+          <Key>
+            <PropertyRef Name="idAsignatura" />
+          </Key>
+          <Property Name="idAsignatura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idProfesor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Profesor" Relationship="Self.FK_Asignatura_Profesor" FromRole="Asignatura" ToRole="Profesor" />
+          <NavigationProperty Name="Asignatura_Alumno" Relationship="dbColegioModel.FK_Asignatura_Alumno_Asignatura" FromRole="Asignatura" ToRole="Asignatura_Alumno" />
+        </EntityType>
+        <EntityType Name="Profesor">
+          <Key>
+            <PropertyRef Name="idProfesor" />
+          </Key>
+          <Property Name="idProfesor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="especialidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Boolean" />
+          <Property Name="idRol" Type="Int32" />
+          <NavigationProperty Name="Asignatura" Relationship="Self.FK_Asignatura_Profesor" FromRole="Profesor" ToRole="Asignatura" />
+          <NavigationProperty Name="Rol_Operacion" Relationship="Self.FK_Profesor_Rol_Operacion" FromRole="Profesor" ToRole="Rol_Operacion" />
+        </EntityType>
+        <EntityType Name="Rol_Operacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idRol" Type="Int32" />
+          <Property Name="idOperacion" Type="Int32" />
+          <NavigationProperty Name="Alumno" Relationship="Self.FK_Alumno_Rol_Operacion" FromRole="Rol_Operacion" ToRole="Alumno" />
+          <NavigationProperty Name="Profesor" Relationship="Self.FK_Profesor_Rol_Operacion" FromRole="Rol_Operacion" ToRole="Profesor" />
+          <NavigationProperty Name="Administrador" Relationship="dbColegioModel.FK_Administrador_Rol_Operacion" FromRole="Rol_Operacion" ToRole="Administrador" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Alumno_Rol_Operacion">
+          <End Role="Rol_Operacion" Type="Self.Rol_Operacion" Multiplicity="0..1" />
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol_Operacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asignatura_Profesor">
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="1" />
+          <End Role="Asignatura" Type="Self.Asignatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesor">
+              <PropertyRef Name="idProfesor" />
+            </Principal>
+            <Dependent Role="Asignatura">
+              <PropertyRef Name="idProfesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profesor_Rol_Operacion">
+          <End Role="Rol_Operacion" Type="Self.Rol_Operacion" Multiplicity="0..1" />
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol_Operacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Profesor">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBColegioEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alumno" EntityType="Self.Alumno" />
+          <EntitySet Name="Asignatura" EntityType="Self.Asignatura" />
+          <EntitySet Name="Profesor" EntityType="Self.Profesor" />
+          <EntitySet Name="Rol_Operacion" EntityType="Self.Rol_Operacion" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Alumno_Rol_Operacion" Association="Self.FK_Alumno_Rol_Operacion">
+            <End Role="Rol_Operacion" EntitySet="Rol_Operacion" />
+            <End Role="Alumno" EntitySet="Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asignatura_Profesor" Association="Self.FK_Asignatura_Profesor">
+            <End Role="Profesor" EntitySet="Profesor" />
+            <End Role="Asignatura" EntitySet="Asignatura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profesor_Rol_Operacion" Association="Self.FK_Profesor_Rol_Operacion">
+            <End Role="Rol_Operacion" EntitySet="Rol_Operacion" />
+            <End Role="Profesor" EntitySet="Profesor" />
+          </AssociationSet>
+          <EntitySet Name="Administrador" EntityType="dbColegioModel.Administrador" />
+          <AssociationSet Name="FK_Administrador_Rol_Operacion" Association="dbColegioModel.FK_Administrador_Rol_Operacion">
+            <End Role="Rol_Operacion" EntitySet="Rol_Operacion" />
+            <End Role="Administrador" EntitySet="Administrador" />
+          </AssociationSet>
+          <EntitySet Name="Asignatura_Alumno" EntityType="dbColegioModel.Asignatura_Alumno" />
+          <AssociationSet Name="FK_Asignatura_Alumno_Alumno" Association="dbColegioModel.FK_Asignatura_Alumno_Alumno">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="Asignatura_Alumno" EntitySet="Asignatura_Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asignatura_Alumno_Asignatura" Association="dbColegioModel.FK_Asignatura_Alumno_Asignatura">
+            <End Role="Asignatura" EntitySet="Asignatura" />
+            <End Role="Asignatura_Alumno" EntitySet="Asignatura_Alumno" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Administrador">
+          <Key>
+            <PropertyRef Name="idAdmin" />
+          </Key>
+          <Property Name="idAdmin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombreusuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="clave" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idRol" Type="Int32" />
+          <NavigationProperty Name="Rol_Operacion" Relationship="dbColegioModel.FK_Administrador_Rol_Operacion" FromRole="Administrador" ToRole="Rol_Operacion" />
+        </EntityType>
+        <Association Name="FK_Administrador_Rol_Operacion">
+          <End Type="dbColegioModel.Rol_Operacion" Role="Rol_Operacion" Multiplicity="0..1" />
+          <End Type="dbColegioModel.Administrador" Role="Administrador" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol_Operacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Administrador">
+              <PropertyRef Name="idRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Asignatura_Alumno">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idAsignatura" Type="Int32" Nullable="false" />
+          <Property Name="idAlumno" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Alumno" Relationship="dbColegioModel.FK_Asignatura_Alumno_Alumno" FromRole="Asignatura_Alumno" ToRole="Alumno" />
+          <NavigationProperty Name="Asignatura" Relationship="dbColegioModel.FK_Asignatura_Alumno_Asignatura" FromRole="Asignatura_Alumno" ToRole="Asignatura" />
+        </EntityType>
+        <Association Name="FK_Asignatura_Alumno_Alumno">
+          <End Type="dbColegioModel.Alumno" Role="Alumno" Multiplicity="1" />
+          <End Type="dbColegioModel.Asignatura_Alumno" Role="Asignatura_Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="idAlumno" />
+            </Principal>
+            <Dependent Role="Asignatura_Alumno">
+              <PropertyRef Name="idAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asignatura_Alumno_Asignatura">
+          <End Type="dbColegioModel.Asignatura" Role="Asignatura" Multiplicity="1" />
+          <End Type="dbColegioModel.Asignatura_Alumno" Role="Asignatura_Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asignatura">
+              <PropertyRef Name="idAsignatura" />
+            </Principal>
+            <Dependent Role="Asignatura_Alumno">
+              <PropertyRef Name="idAsignatura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbColegioModelStoreContainer" CdmEntityContainer="DBColegioEntities">
+          <EntitySetMapping Name="Alumno">
+            <EntityTypeMapping TypeName="dbColegioModel.Alumno">
+              <MappingFragment StoreEntitySet="Alumno">
+                <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asignatura">
+            <EntityTypeMapping TypeName="dbColegioModel.Asignatura">
+              <MappingFragment StoreEntitySet="Asignatura">
+                <ScalarProperty Name="idAsignatura" ColumnName="idAsignatura" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profesor">
+            <EntityTypeMapping TypeName="dbColegioModel.Profesor">
+              <MappingFragment StoreEntitySet="Profesor">
+                <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="especialidad" ColumnName="especialidad" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol_Operacion">
+            <EntityTypeMapping TypeName="dbColegioModel.Rol_Operacion">
+              <MappingFragment StoreEntitySet="Rol_Operacion">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="idOperacion" ColumnName="idOperacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="dbColegioModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Administrador">
+            <EntityTypeMapping TypeName="dbColegioModel.Administrador">
+              <MappingFragment StoreEntitySet="Administrador">
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="nombreusuario" ColumnName="nombreusuario" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idAdmin" ColumnName="idAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asignatura_Alumno">
+            <EntityTypeMapping TypeName="dbColegioModel.Asignatura_Alumno">
+              <MappingFragment StoreEntitySet="Asignatura_Alumno">
+                <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
+                <ScalarProperty Name="idAsignatura" ColumnName="idAsignatura" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,60 @@
+﻿@model List<SitioWebColegio.Models.viewModels.profesorViewModel>
+@{
+    ViewBag.Title = "Administrador";
+    Layout = "~/Views/Shared/LayoutAdministrador.cshtml";
+}
+
+<h2>Bienvenido Administrador</h2>
+
+
+@if (!string.IsNullOrEmpty(ViewBag.mensajeEliminar))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.mensajeEliminar
+    </div>
+}
+
+
+
+<div style="max-width: 95%">
+    <a class="btn btn-success" href="@Url.Content("~/Profesor/Nuevo")">Nuevo</a>
+    <a class="btn btn-outline-info float-end" href="@Url.Content("~/Profesor/Asignatura")">Asignatura</a>
+
+    <table class="table table-bordered table-hover" style="width: 100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Especialidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var omodel in Model)
+            {
+
+                <tr>
+                    <td>@omodel.idProfesor</td>
+                    <td>@omodel.nombre</td>
+                    <td>@omodel.apellido</td>
+                    <td>@omodel.especialidad</td>
+                    <td>
+                        <a href="@Url.Content("~/Profesor/DetalleProfesor?Id=") + @omodel.idProfesor" class="btn btn-outline-primary">Detalle</a>
+                        <a href="@Url.Content("~/Profesor/Editar?Id=") + @omodel.idProfesor" class="btn btn-outline-warning">Editar</a>
+                        <a onclick="return jsEliminar();" href="@Url.Content("~/Profesor/Eliminar?Id=") + @omodel.idProfesor" class="btn btn-outline-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+
+    function jsEliminar() {
+        return confirm("Estas Seguro que deseas eliminar este registro?");
+    }
+
+</script>
