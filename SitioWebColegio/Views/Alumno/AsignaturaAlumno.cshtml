@@ -1,11 +1,13 @@
 ﻿@model SitioWebColegio.Models.viewModels.AlumnoProfesorAsignaturaViewModel
+
 @{
-    ViewBag.Title = "Administrador";
+    ViewBag.Title = "AsignaturaAlumno";
     Layout = "~/Views/Shared/LayoutAdministrador.cshtml";
 }
 
-<h2>Asignatura Profesores</h2>
-<a class="btn btn-success" href="@Url.Content("~/Profesor/AsignaturaNuevo")">Nuevo</a>
+<h2>Asignaturas Alumnos</h2>
+<a class="btn btn-success" href="@Url.Content("~/Alumno/AsignaturaNuevoAlumno")">Nuevo</a>
+
 
 
 @if (ViewBag.mensajeEliminar != null)
@@ -23,8 +25,8 @@
             <tr>
                 <th>#</th>
                 <th>Nombre</th>
-                <th>Id Profesor</th>
                 <th>Id Alumno</th>
+                <th>Id Profesor</th>
                 <th>Acciones</th>
 
             </tr>
@@ -34,16 +36,17 @@
             @foreach (var omodel in Model.asignaturaList)
             {
 
-                <tr>
-                    <td>@omodel.idAsignatura</td>
-                    <td>@omodel.nombre</td>
-                    <td>@omodel.idProfesor</td>
-                    <td>@omodel.idAlumno</td>
-                    <td>
-                        <a href="@Url.Content("~/Profesor/AsignaturaEditar?Id=") + @omodel.idProfesor" class="btn btn-outline-warning">Editar</a>
-                        <a onclick="return jsEliminar();" href="@Url.Content("~/Profesor/AsignaturaEliminar?Id=") + @omodel.idAsignatura" class="btn btn-outline-danger">Eliminar</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>@omodel.idAsignatura</td>
+                <td>@omodel.nombre</td>
+                <td>@omodel.idAlumno</td>
+                <td>@omodel.idProfesor</td>
+
+                <td>
+                    <a href="@Url.Content("~/Alumno/AsignaturaEditarAlumno?Id=") + @omodel.idAsignatura" class="btn btn-outline-warning">Editar</a>
+                    <a onclick="return jsEliminar();" href="@Url.Content("~/Alumno/AsignaturaEliminarAlumno?Id=") + @omodel.idAsignatura" class="btn btn-outline-danger">Eliminar</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

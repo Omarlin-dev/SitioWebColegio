@@ -4,13 +4,12 @@
     Layout = "~/Views/Shared/LayoutAdministrador.cshtml";
 }
 
-<h2>Bienvenido Administrador</h2>
+<h3>Bienvenido Administrador A la sesion de Profesores</h3>
 
-
-@if (!string.IsNullOrEmpty(ViewBag.mensajeEliminar))
+@if (ViewBag.mensajeEliminar != null)
 {
-    <div class="alert alert-danger" role="alert">
-        @ViewBag.mensajeEliminar
+    <div class="alert alert-danger text-center" style="height: 65px;" role="alert">
+        <p>@ViewBag.mensajeEliminar</p>
     </div>
 }
 

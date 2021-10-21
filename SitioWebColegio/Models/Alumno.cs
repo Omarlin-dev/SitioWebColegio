@@ -17,12 +17,13 @@ namespace SitioWebColegio.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Alumno()
         {
-            this.Asignatura_Alumno = new HashSet<Asignatura_Alumno>();
+            this.Asignatura = new HashSet<Asignatura>();
         }
     
         public int idAlumno { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
+        public string telefono { get; set; }
         public string nombreUsuario { get; set; }
         public string clave { get; set; }
         public Nullable<bool> estado { get; set; }
@@ -30,6 +31,6 @@ namespace SitioWebColegio.Models
     
         public virtual Rol_Operacion Rol_Operacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Asignatura_Alumno> Asignatura_Alumno { get; set; }
+        public virtual ICollection<Asignatura> Asignatura { get; set; }
     }
 }

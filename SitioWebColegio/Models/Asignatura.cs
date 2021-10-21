@@ -14,18 +14,12 @@ namespace SitioWebColegio.Models
     
     public partial class Asignatura
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Asignatura()
-        {
-            this.Asignatura_Alumno = new HashSet<Asignatura_Alumno>();
-        }
-    
         public int idAsignatura { get; set; }
         public string nombre { get; set; }
-        public int idProfesor { get; set; }
+        public Nullable<int> idProfesor { get; set; }
+        public Nullable<int> idAlumno { get; set; }
     
         public virtual Profesor Profesor { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Asignatura_Alumno> Asignatura_Alumno { get; set; }
+        public virtual Alumno Alumno { get; set; }
     }
 }

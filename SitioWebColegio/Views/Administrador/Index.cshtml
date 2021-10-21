@@ -5,12 +5,11 @@
 }
 
 <h2>Bienvenido Administrador</h2>
-
-@if (!string.IsNullOrEmpty(ViewBag.mensajeEliminar))
+@if (ViewBag.mensajeEliminar != null)
 {
-<div class="alert alert-danger" role="alert">
-    @ViewBag.mensajeEliminar
-</div>
+    <div class="alert alert-danger text-center" style="height: 65px;" role="alert">
+        <p>@ViewBag.mensajeEliminar</p>
+    </div>
 }
 
 <a class="btn btn-success" href="@Url.Content("~/Administrador/Nuevo")">Nuevo</a>

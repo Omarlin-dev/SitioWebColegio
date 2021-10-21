@@ -133,6 +133,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="AutomapperConfig\AutomapperProfile.cs" />
     <Compile Include="Controllers\AdministradorController.cs" />
+    <Compile Include="Controllers\AlumnoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfesorController.cs" />
     <Compile Include="Global.asax.cs">
@@ -145,9 +146,6 @@
       <DependentUpon>db.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Asignatura.cs">
-      <DependentUpon>db.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Asignatura_Alumno.cs">
       <DependentUpon>db.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\db.Context.cs">
@@ -175,6 +173,7 @@
       <DependentUpon>db.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\viewModels\administradorViewModel.cs" />
+    <Compile Include="Models\viewModels\AlumnoProfesorAsignaturaViewModel.cs" />
     <Compile Include="Models\viewModels\alumnoViewModel.cs" />
     <Compile Include="Models\viewModels\asignaturaViewModel.cs" />
     <Compile Include="Models\viewModels\profesorViewModel.cs" />
@@ -281,6 +280,18 @@
     <Content Include="Views\Profesor\Editar.cshtml" />
     <Content Include="Views\Shared\LayoutProfesor.cshtml" />
     <Content Include="Views\Profesor\Asignatura.cshtml" />
+    <Content Include="Views\Profesor\AsignaturaNuevo.cshtml" />
+    <Content Include="Views\Profesor\AsignaturaEditar.cshtml" />
+    <Content Include="Views\Profesor\AsignaturaEliminar.cshtml" />
+    <Content Include="Views\Alumno\TodosAlumnos.cshtml" />
+    <Content Include="Views\Alumno\DetalleAlumno.cshtml" />
+    <Content Include="Views\Alumno\TodosAlumnosAdmin.cshtml" />
+    <Content Include="Views\Alumno\CompanerosAlumnos.cshtml" />
+    <Content Include="Views\Alumno\NuevoAlumno.cshtml" />
+    <Content Include="Views\Alumno\EditarAlumno.cshtml" />
+    <Content Include="Views\Alumno\AsignaturaAlumno.cshtml" />
+    <Content Include="Views\Alumno\AsignaturaNuevoAlumno.cshtml" />
+    <Content Include="Views\Alumno\AsignaturaEditarAlumno.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

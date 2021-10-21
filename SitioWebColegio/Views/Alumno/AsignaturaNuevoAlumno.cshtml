@@ -1,0 +1,46 @@
+﻿@model SitioWebColegio.Models.viewModels.AlumnoProfesorAsignaturaViewModel
+@{
+    ViewBag.Title = "AsignaturaNuevoAlumno";
+    Layout = "~/Views/Shared/LayoutAdministrador.cshtml";
+
+}
+
+<h2>Nueva Asignatura Alumno</h2>
+
+<div class="text-center justify-content-center h-50" style="max-width: 50%;">
+    <form action="@Url.Content("~/Alumno/AsignaturaNuevoAlumno")" method="post" class="form-control">
+
+        <div class="form-control">
+            <label>Asignatura</label>
+            @Html.TextBoxFor(d => d.AsignaturaFirst.nombre, "", new { @class = "form-control" })
+        </div>
+        <div class="form-control">
+            <label>Profesor</label>
+            <select name="AsignaturaFirst.idProfesor" class="form-control">
+                <option value="">Seleccione</option>
+
+                @foreach (var omodel in Model.profesorList)
+                {
+                    <option value="@omodel.idProfesor">@omodel.nombre</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-control">
+            <label>Alumno</label>
+            <select name="AsignaturaFirst.idAlumno" class="form-control">
+                <option value="">Seleccione</option>
+
+                @foreach (var omodel in Model.alumnoList)
+                {
+                    <option value="@omodel.idAlumno">@omodel.nombre</option>
+                }
+            </select>
+        </div>
+
+
+        <div class="text-end float-end">
+            <input type="submit" value="Enviar" class="btn btn-success" />
+        </div>
+    </form>
+</div>

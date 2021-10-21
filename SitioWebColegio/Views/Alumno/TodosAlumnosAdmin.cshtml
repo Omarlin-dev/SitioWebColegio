@@ -1,0 +1,50 @@
+﻿@model List<SitioWebColegio.Models.Alumno>
+@{
+    ViewBag.Title = "Alumnos";
+    Layout = "~/Views/Shared/LayoutAdministrador.cshtml";
+
+}
+
+<h3>Alumnos Admin</h3>
+
+
+@if (ViewBag.mensajeEliminar != null)
+{
+    <div class="alert alert-danger text-center" style="height: 65px;" role="alert">
+        <p>@ViewBag.mensajeEliminar</p>
+    </div>
+}
+<div style="max-width: 95%">
+    <a class="btn btn-success" href="@Url.Content("~/Alumno/AsignaturaNuevoAlumno")">Nuevo</a>
+    <a class="btn btn-outline-info float-end" href="@Url.Content("~/Alumno/AsignaturaAlumno")">Asignatura</a>
+
+        <table class="table table-bordered table-hover" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Telefono</th>
+                    <th>Ver mas</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var omodel in Model)
+                {
+
+                    <tr>
+                        <td>@omodel.idAlumno</td>
+                        <td>@omodel.nombre</td>
+                        <td>@omodel.apellido</td>
+                        <td>@omodel.telefono</td>
+                        <td>
+                            <a href="@Url.Content("~/Alumno/DetalleAlumno?Id=") + @omodel.idAlumno" class="btn btn-outline-primary">Detalle</a>
+                            <a href="@Url.Content("~/Alumno/EditarAlumno?Id=") + @omodel.idAlumno" class="btn btn-outline-warning">Editar</a>
+                            <a onclick="return jsEliminar();" href="@Url.Content("~/Alumno/EliminarAlumno?Id=") + @omodel.idAlumno" class="btn btn-outline-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+

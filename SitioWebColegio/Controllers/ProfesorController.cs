@@ -14,8 +14,9 @@ namespace SitioWebColegio.Controllers
         public ActionResult IndexProfesores()
         {
             var lstProfesor = new List<profesorViewModel>();
+            ViewBag.messageEliminar = ViewData["MesangeEliminar"];
 
-            using(var db = new DBColegioEntities())
+            using (var db = new DBColegioEntities())
             {
                 lstProfesor = AutoMapper.Mapper.Map<List<profesorViewModel>>(db.Profesor.ToList());
             }
@@ -40,6 +41,8 @@ namespace SitioWebColegio.Controllers
 
         public ActionResult IndexAdmin()
         {
+            ViewBag.mensajeEliminar = TempData["MensajeEliminarP"];
+
             var lstProfesor = new List<profesorViewModel>();
 
             using (var db = new DBColegioEntities())
@@ -56,6 +59,9 @@ namespace SitioWebColegio.Controllers
         [HttpPost]
         public ActionResult Nuevo(profesorViewModel model)
         {
+            if (!ModelState.IsValid)
+                return View(model);
+
             using (DBColegioEntities db = new DBColegioEntities())
             {
                 model.idRol = 2;
@@ -82,6 +88,9 @@ namespace SitioWebColegio.Controllers
         [HttpPost]
         public ActionResult Editar(profesorViewModel model)
         {
+            if (!ModelState.IsValid)
+                return View(model);
+
             using (DBColegioEntities db = new DBColegioEntities())
             {
                 model.idRol = 2;
@@ -90,7 +99,8 @@ namespace SitioWebColegio.Controllers
                 db.Entry(oprofesor).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
-            return View();
+            return Redirect("IndexAdmin");
+
         }
 
         public ActionResult Eliminar(int Id)
@@ -98,7 +108,7 @@ namespace SitioWebColegio.Controllers
             using (DBColegioEntities db = new DBColegioEntities())
             {
                 var profesordb = db.Profesor.FirstOrDefault(d => d.idProfesor == Id);
-                ViewBag.mensajeEliminar = "Usuario: " + profesordb.nombre + " Eliminado con exito";
+                TempData["MensajeEliminarP"] = "Profesor/a: " + profesordb.nombre + " Eliminado con exito";
 
                 db.Profesor.Remove(profesordb);
                 db.SaveChanges();
@@ -109,48 +119,104 @@ namespace SitioWebColegio.Controllers
 
         public ActionResult Asignatura()
         {
-            var lstProfesor = new List<profesorViewModel>();
-            var oprofesor = new profesorViewModel();
+            ViewBag.mensajeEliminar = TempData["MensajeEliminarA"];
 
+            var model = new AlumnoProfesorAsignaturaViewModel();
+            
             using(DBColegioEntities db = new DBColegioEntities())
             {
-                lstProfesor = AutoMapper.Mapper.Map<List<profesorViewModel>>(db.Profesor.ToList());
-                oprofesor.asiginaturas = AutoMapper.Mapper.Map<List<Asignatura>>(db.Asignatura.ToList());
-                lstProfesor.Add(oprofesor);
+                model.asignaturaList = AutoMapper.Mapper.Map<List<asignaturaViewModel>>(db.Asignatura.ToList());
             }
-
-            return View(lstProfesor);
+                                                                                                                                                                              
+            return View(model);
         }
 
         public ActionResult AsignaturaNuevo()
         {
-            var lstProfesor = new List<profesorViewModel>();
-            var oprofesor = new profesorViewModel();
+            var model = new AlumnoProfesorAsignaturaViewModel();
+
 
             using (DBColegioEntities db = new DBColegioEntities())
             {
-                lstProfesor = AutoMapper.Mapper.Map<List<profesorViewModel>>(db.Profesor.ToList());
-                lstProfesor.Add(oprofesor);
+                model.profesorList = AutoMapper.Mapper.Map<List<profesorViewModel>>(db.Profesor.ToList());
+                model.alumnoList = db.Alumno.ToList();
+
+                model.asignaturaList = AutoMapper.Mapper.Map<List<asignaturaViewModel>>(db.Asignatura.ToList());
             }
 
-            return View(lstProfesor);
+            return View(model);
         }
      
     [HttpPost]
-    public ActionResult AsignaturaNuevo(profesorViewModel oProfesor)
+    public ActionResult AsignaturaNuevo(AlumnoProfesorAsignaturaViewModel omodel)
     {
-      
 
-        using (DBColegioEntities db = new DBColegioEntities())
+            if (!ModelState.IsValid)
+                return View(omodel);
+
+            using (DBColegioEntities db = new DBColegioEntities())
         {
-          var oProfesordb = AutoMapper.Mapper.Map<Profesor>(oProfesor);
+          var asignaturadb = AutoMapper.Mapper.Map<Asignatura>(omodel.AsignaturaFirst);
 
-                db.Profesor.Add(oProfesordb);
+                db.Asignatura.Add(asignaturadb);
+
                 db.SaveChanges();
         }
 
-            return Redirect("IndexAdmin");
+            return Redirect("Asignatura");
+
         }
+
+        public ActionResult AsignaturaEditar(int Id)
+        {
+            var model = new AlumnoProfesorAsignaturaViewModel();
+
+            using (DBColegioEntities db = new DBColegioEntities())
+            {
+                model.AsignaturaFirst = AutoMapper.Mapper.Map<asignaturaViewModel>(db.Asignatura.FirstOrDefault(d => d.idAsignatura == Id));
+                model.profesorList = AutoMapper.Mapper.Map<List<profesorViewModel>>(db.Profesor.ToList());
+                model.alumnoList = db.Alumno.ToList();
+
+                model.asignaturaList = AutoMapper.Mapper.Map<List<asignaturaViewModel>>(db.Asignatura.ToList());
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AsignaturaEditar(AlumnoProfesorAsignaturaViewModel omodel)
+        {
+            if (!ModelState.IsValid)
+                return View(omodel);
+
+            using (DBColegioEntities db = new DBColegioEntities())
+            {
+                var asignaturadb = AutoMapper.Mapper.Map<Asignatura>(omodel.AsignaturaFirst);
+
+
+                db.Entry(asignaturadb).State = System.Data.Entity.EntityState.Modified;
+
+                db.SaveChanges();
+            }
+
+            return Redirect("Asignatura");
+
+        }
+
+        public ActionResult AsignaturaEliminar(int Id)
+        {
+            using (DBColegioEntities db = new DBColegioEntities())
+            {
+                var oAsignatura = db.Asignatura.FirstOrDefault(d => d.idAsignatura == Id);
+
+                TempData["MensajeEliminarA"] = "Asignatura: " + oAsignatura.nombre + " Eliminada con exito";
+
+                db.Asignatura.Remove(oAsignatura);
+                db.SaveChanges();
+
+            }
+            return Redirect("Asignatura");
     }
+        }
    
 }

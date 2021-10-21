@@ -1,4 +1,4 @@
-﻿@model SitioWebColegio.Models.viewModels.profesorViewModel
+﻿@model SitioWebColegio.Models.viewModels.alumnoViewModel
 
 @{
     ViewBag.Title = "DetalleProfesor";
@@ -7,47 +7,47 @@
 
 <h2>
     <a style="float: right; color: blue" href="@Url.Action("IndexProfesor","Profesor")"><i class="fas fa-arrow-alt-circle-left"></i></a>
-    Detalle Profesor
+    Detalle Alumno
 </h2>
 
-@if (Model.idProfesor <= 0 )
+@if (Model.alumno.idAlumno <= 0)
 {
-    <h3>El ID del Profesor no existe</h3>
+    <h3>El ID del Alumno no existe</h3>
 }
 
 else
 {
     <div class="form-group">
         <label>#: </label>
-        @Model.idProfesor
+        @Model.alumno.idAlumno
     </div>
 
     <div class="form-group">
         <label>Nombre: </label>
-        @Model.nombre
+        @Model.alumno.nombre
     </div>
 
     <div class="form-group">
         <label>Apellido: </label>
-        @Model.apellido
+        @Model.alumno.apellido
     </div>
 
     <div class="form-group">
-        <label>Especialidad: </label>
-        @Model.especialidad
+        <label>Telefono: </label>
+        @Model.alumno.telefono
     </div>
 
     <div class="form-group">
         <label>Asignaturas: </label><br />
-        @foreach(var omodel in Model.asiginaturas)
+        @foreach (var omodel in Model.asignaturas)
         {
-    <ul style="margin-left: 30px;">
-        <li>  @omodel.nombre </li>
-    </ul>
+            <ul style="margin-left: 30px;">
+                <li>  @omodel.nombre </li>
+            </ul>
         }
     </div>
     <br />
 
-   
+
 
 }

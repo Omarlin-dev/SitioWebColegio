@@ -1,0 +1,45 @@
+﻿@model SitioWebColegio.Models.viewModels.alumnoViewModel
+@{
+    ViewBag.Title = "NuevoAlumno";
+    Layout = "~/Views/Shared/LayoutAdministrador.cshtml";
+
+}
+
+<h2>Nuevo Alumno</h2>
+
+<div class="text-center justify-content-center" style="max-width: 50%;">
+    <form action="@Url.Content("~/Alumno/NuevoAlumno")" method="post" class="form-control">
+        <div class="form-control">
+            <label for="nombre">Nombre</label>
+            @Html.TextBoxFor(d => d.alumno.nombre, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.alumno.nombre, "", new { @class = "danger" })
+
+        </div>
+        <div class="form-control">
+            <label for="apellido">Apellido</label>
+            @Html.TextBoxFor(d => d.alumno.apellido, "", new { @class = "form-control" })
+        </div>
+        <div class="form-control">
+            <label for="nombreusuario">Nombre de Usuario</label>
+            @Html.TextBoxFor(d => d.alumno.nombreUsuario, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.alumno.nombreUsuario, "", new { @class = "danger" })
+
+        </div>
+        <div class="form-control">
+            <label for="clave">Clave</label>
+            <input type="password" name="alumno.clave" class="form-control" />
+            @Html.ValidationMessageFor(d => d.alumno.clave, "", new { @class = "danger" })
+
+        </div>
+        <div class="form-control">
+            <label for="especialidad">Telefono</label>
+            @Html.TextBoxFor(d => d.alumno.telefono, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.alumno.telefono, "", new { @class = "danger" })
+
+        </div>
+        
+        <div class="text-end float-end">
+            <input type="submit" value="Enviar" class="btn btn-outline-success" />
+        </div>
+    </form>
+</div>

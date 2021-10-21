@@ -13,9 +13,10 @@ namespace SitioWebColegio.Controllers
         // GET: Administrador
         public ActionResult Index()
         {
-            List<administradorViewModel> lst = new List<administradorViewModel>();
+            ViewBag.mensajeEliminar = TempData["MensajeEliminar"];
 
-            using(var db = new DBColegioEntities())
+            List<administradorViewModel> lst = new List<administradorViewModel>();
+            using (var db = new DBColegioEntities())
             {
                 lst = AutoMapper.Mapper.Map<List<administradorViewModel>>(db.Administrador.ToList());
 
@@ -33,7 +34,10 @@ namespace SitioWebColegio.Controllers
         [HttpPost]
         public ActionResult Nuevo(administradorViewModel model)
         {
-            using(DBColegioEntities db = new DBColegioEntities())
+            if (!ModelState.IsValid)
+                return View(model);
+
+            using (DBColegioEntities db = new DBColegioEntities())
             {
                 model.idRol = 1;
                 var admin = AutoMapper.Mapper.Map<Administrador>(model);
@@ -59,6 +63,9 @@ namespace SitioWebColegio.Controllers
         [HttpPost]
         public ActionResult Editar(administradorViewModel model)
         {
+            if (!ModelState.IsValid)
+                return View(model);
+
             using (DBColegioEntities db = new DBColegioEntities())
             {
                 model.idRol = 1;
@@ -75,7 +82,7 @@ namespace SitioWebColegio.Controllers
             using (DBColegioEntities db = new DBColegioEntities())
             {
                 var admindb = db.Administrador.FirstOrDefault(d => d.idAdmin == Id);
-                ViewBag.mensajeEliminar = "Usuario: " + admindb.nombre + " Eliminado con exito";
+                TempData["MensajeEliminar"] = "Usuario: " + admindb.nombre + " Eliminado con exito";
 
                 db.Administrador.Remove(admindb);
                 db.SaveChanges();

@@ -29,8 +29,8 @@ namespace SitioWebColegio.Models
         public Nullable<bool> estado { get; set; }
         public Nullable<int> idRol { get; set; }
     
+        public virtual Rol_Operacion Rol_Operacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Asignatura> Asignatura { get; set; }
-        public virtual Rol_Operacion Rol_Operacion { get; set; }
     }
 }

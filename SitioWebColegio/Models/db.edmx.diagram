@@ -5,19 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9a154b663227454491e9b58e35561b2e" Name="Diagram1" ZoomLevel="108">
-        <EntityTypeShape EntityType="dbColegioModel.Alumno" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbColegioModel.Asignatura" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="dbColegioModel.Profesor" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="dbColegioModel.Rol_Operacion" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="dbColegioModel.sysdiagrams" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
-        <AssociationConnector Association="dbColegioModel.FK_Alumno_Rol_Operacion" ManuallyRouted="false" />
-        <AssociationConnector Association="dbColegioModel.FK_Asignatura_Profesor" ManuallyRouted="false" />
         <AssociationConnector Association="dbColegioModel.FK_Profesor_Rol_Operacion" ManuallyRouted="false" />
         <EntityTypeShape EntityType="dbColegioModel.Administrador" Width="1.5" PointX="1" PointY="6.25" />
         <AssociationConnector Association="dbColegioModel.FK_Administrador_Rol_Operacion" />
-        <EntityTypeShape EntityType="dbColegioModel.Asignatura_Alumno" Width="1.5" PointX="7.5" PointY="3.125" />
-        <AssociationConnector Association="dbColegioModel.FK_Asignatura_Alumno_Alumno" />
-        <AssociationConnector Association="dbColegioModel.FK_Asignatura_Alumno_Asignatura" />
+        <EntityTypeShape EntityType="dbColegioModel.Asignatura" Width="1.5" PointX="7.125" PointY="3.5" />
+        <AssociationConnector Association="dbColegioModel.FK_Asignatura_Profesor" />
+        <EntityTypeShape EntityType="dbColegioModel.Alumno" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="dbColegioModel.FK_Alumno_Rol_Operacion" />
+        <AssociationConnector Association="dbColegioModel.FK_Asignatura_Alumno" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

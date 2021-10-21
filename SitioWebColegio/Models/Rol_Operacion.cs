@@ -17,9 +17,9 @@ namespace SitioWebColegio.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Rol_Operacion()
         {
-            this.Alumno = new HashSet<Alumno>();
             this.Profesor = new HashSet<Profesor>();
             this.Administrador = new HashSet<Administrador>();
+            this.Alumno = new HashSet<Alumno>();
         }
     
         public int id { get; set; }
@@ -27,10 +27,10 @@ namespace SitioWebColegio.Models
         public Nullable<int> idOperacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Alumno> Alumno { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Profesor> Profesor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Administrador> Administrador { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Alumno> Alumno { get; set; }
     }
 }

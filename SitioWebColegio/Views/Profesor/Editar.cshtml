@@ -16,6 +16,8 @@
         <div class="form-control">
             <label for="nombre">Nombre</label>
             @Html.TextBoxFor(d => d.nombre, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.nombre, "", new { @class = "danger" })
+
         </div>
         <div class="form-control">
             <label for="apellido">Apellido</label>
@@ -24,14 +26,20 @@
         <div class="form-control">
             <label for="nombreusuario">Nombre de Usuario</label>
             @Html.TextBoxFor(d => d.nombreUsuario, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.nombreUsuario, "", new { @class = "danger" })
+
         </div>
         <div class="form-control">
             <label for="clave">Clave</label>
             <input type="password" name="clave" class="form-control" />
+            @Html.ValidationMessageFor(d => d.clave, "", new { @class = "danger" })
+
         </div>
         <div class="form-control">
             <label for="especialidad">Especialidad</label>
             @Html.TextBoxFor(d => d.especialidad, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.especialidad, "", new { @class = "danger" })
+
         </div>
         <div class="form-control">
             <label for="estado">Estado</label>

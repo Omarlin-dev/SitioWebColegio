@@ -25,12 +25,11 @@ namespace SitioWebColegio.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Alumno> Alumno { get; set; }
-        public virtual DbSet<Asignatura> Asignatura { get; set; }
         public virtual DbSet<Profesor> Profesor { get; set; }
         public virtual DbSet<Rol_Operacion> Rol_Operacion { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Administrador> Administrador { get; set; }
-        public virtual DbSet<Asignatura_Alumno> Asignatura_Alumno { get; set; }
+        public virtual DbSet<Asignatura> Asignatura { get; set; }
+        public virtual DbSet<Alumno> Alumno { get; set; }
     }
 }

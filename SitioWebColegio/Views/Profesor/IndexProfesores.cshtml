@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/LayoutProfesor.cshtml";
 }
 
-<h2>Bienvenido Profesor</h2>
+<h3>Bienvenido Profesor</h3>
 
 <div>
     <table class="table table-bordered table-hover" style="width: 100%">
@@ -21,13 +21,13 @@
             @foreach (var omodel in Model)
             {
 
-                <tr>
-                    <td>@omodel.idProfesor</td>
-                    <td>@omodel.nombre</td>
-                    <td>@omodel.apellido</td>
-                    <td>@omodel.especialidad</td>
-                   <td><a href="@Url.Content("~/Profesores/DetalleProfesor?Id=") + @omodel.idProfesor">Detalle</a></td>
-                </tr>
+            <tr>
+                <td>@omodel.idProfesor</td>
+                <td>@omodel.nombre</td>
+                <td>@omodel.apellido</td>
+                <td>@omodel.especialidad</td>
+                <td><a href="@Url.Content("~/Profesor/DetalleProfesor?Id=") + @omodel.idProfesor" class="btn btn-outline-primary">Detalle</a></td>
+            </tr>
             }
         </tbody>
     </table>

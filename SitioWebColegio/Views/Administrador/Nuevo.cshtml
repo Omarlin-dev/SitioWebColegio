@@ -1,6 +1,8 @@
 ﻿@model SitioWebColegio.Models.viewModels.administradorViewModel
 @{
     ViewBag.Title = "Nuevo";
+    Layout = "~/Views/Shared/LayoutAdministrador.cshtml";
+
 }
 
 <h2>Nuevo</h2>
@@ -11,6 +13,7 @@
         <div class="form-control">
             <label for="nombre">Nombre</label>
             @Html.TextBoxFor(d => d.nombre, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.nombre, "", new { @class = "danger" })
         </div>
         <div class="form-control">
             <label for="apellido">Apellido</label>
@@ -19,14 +22,18 @@
         <div class="form-control">
             <label for="nombreusuario">Nombre de Usuario</label>
             @Html.TextBoxFor(d => d.nombreusuario, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.nombreusuario, "", new { @class = "danger" })
+
         </div>
         <div class="form-control">
             <label for="clave">Clave</label>
             <input type="password" name="clave" class="form-control" />
+            @Html.ValidationMessageFor(d => d.clave, "", new { @class = "danger" })
+
         </div>
 
         <div class="text-end float-end">
-            <input type="submit" value="Enviar" class="btn btn-outline-success"/>
+            <input type="submit" value="Enviar" class="btn btn-success"/>
         </div>
     </form>
 </div>
