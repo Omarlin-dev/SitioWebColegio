@@ -5,12 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using SitioWebColegio.Models.viewModels;
 using SitioWebColegio.Models;
+using SitioWebColegio.Filtro;
 
 namespace SitioWebColegio.Controllers
 {
     public class AdministradorController : Controller
     {
         // GET: Administrador
+        [Autorizados(idOperacionadmin: 1)]
         public ActionResult Index()
         {
             ViewBag.mensajeEliminar = TempData["MensajeEliminar"];
@@ -25,12 +27,12 @@ namespace SitioWebColegio.Controllers
             return View(lst);
         }
 
-                
+        [Autorizados(idOperacionadmin: 1)]
         public ActionResult Nuevo()
         {
             return View();
         }
-
+        [Autorizados(idOperacionadmin: 1)]
         [HttpPost]
         public ActionResult Nuevo(administradorViewModel model)
         {
@@ -47,7 +49,7 @@ namespace SitioWebColegio.Controllers
             }
             return Redirect("Index");
         }
-
+        [Autorizados(idOperacionadmin: 1)]
         public ActionResult Editar(int Id)
         {
             administradorViewModel model = new administradorViewModel();
@@ -59,6 +61,7 @@ namespace SitioWebColegio.Controllers
             }
             return View(model);
         }
+        [Autorizados(idOperacionadmin: 1)]
 
         [HttpPost]
         public ActionResult Editar(administradorViewModel model)
@@ -76,7 +79,7 @@ namespace SitioWebColegio.Controllers
             }
             return View();
         }
-
+        [Autorizados(idOperacionadmin: 1)]
         public ActionResult Eliminar(int Id)
         {
             using (DBColegioEntities db = new DBColegioEntities())

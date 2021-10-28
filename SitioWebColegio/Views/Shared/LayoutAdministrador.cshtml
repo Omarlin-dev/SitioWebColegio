@@ -8,11 +8,9 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 </head>
 <body>
-
-
-
     <nav class="navselection navbar navbar-expand-xl navbar-dark bg-primary">
         <div class="container-fluid">
             @Html.ActionLink("Escuela Emma Balaguer Vallejo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
@@ -21,11 +19,25 @@
             </button>
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav m-auto">
-                    <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Administrador/Index")">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Administrador/Index")">Admin</a></li>
                     <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Profesor/IndexAdmin")">Profesores</a></li>
                     <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Alumno/TodosAlumnosAdmin")">Alumnos</a></li>
-                    <li class="nav-item">@Html.ActionLink("Cerrar sesion", "logof", "Acesso", new { @class = "nav-link active" })</li>
-                    <li class="nav-item"></li>
+                    <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Acceso/Logof")">Cerrar sesion</a></li>
+                    @if (Session["userTitulo"] != null)
+                    {
+                        if (Session["Administrador"] != null)
+                        {
+                            <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Administrador/Index")"><i class="fas fa-user"></i> @Session["userTitulo"]</a></li>
+                        }
+                        if (Session["Profesor"] != null)
+                        {
+                            <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Profesor/IndexProfesores")"><i class="fas fa-user"></i> @Session["userTitulo"]</a></li>
+                        }
+                        if (Session["Alumno"] != null)
+                        {
+                            <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Alumno/TodosAlumnos")"><i class="fas fa-user"></i> @Session["userTitulo"]</a></li>
+                        }
+                    }
                 </ul>
             </div>
         </div>

@@ -1,0 +1,38 @@
+﻿@model SitioWebColegio.Models.viewModels.LoginViewModel
+@{
+    ViewBag.Title = "Iniciar Sesion";
+    Layout = "~/Views/Shared/LayoutLogin.cshtml";
+}
+
+<div class="form-signin">
+    <form method="post" action="@Url.Action("Login","Acceso")">
+        <h1 class="h3 mb-3 fw-normal text-white text-center">Inicicar Sesion</h1>
+        @if (ViewBag.noExiste != null)
+        {
+            <h5 class="text-danger text-center">@ViewBag.noExiste</h5>
+
+        }
+        <div class="form-floating">
+            <input name="NameUser" class="form-control" id="floatingInput" placeholder="Ingrese Su Usuario">
+            <label for="floatingInput">Usuario</label>
+            @Html.ValidationMessageFor(d => d.NameUser, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-floating">
+            <input name="Clave" autocomplete="off" type="password" class="form-control" id="floatingPassword" placeholder="Ingrese su clave">
+            <label for="floatingPassword">Clave</label>
+            @Html.ValidationMessageFor(d => d.Clave, "", new { @class = "text-danger" })
+
+        </div>
+        <div class="form-floating">
+            <select name="Rol">
+                <option value="">Seleccione</option>
+                <option value="Profesor" name="Rol">Profesor</option>
+                <option value="Alumno" name="Rol">Alumno</option>
+                <option value="Administrador" name="Rol">Administrador</option>
+            </select><br />
+            @Html.ValidationMessageFor(d => d.Rol, "", new { @class = "text-danger" })
+
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+    </form>
+</div>

@@ -35,8 +35,8 @@
                     <td>@omodel.apellido</td>
                     <td>@omodel.nombreusuario</td>
                     <td>
-                        <a class="btn btn-warning" href="@Url.Content("~/Administrador/Editar?Id=")+ @omodel.idAdmin">Editar</a>
-                        <a class="btn btn-danger" onclick="return jsEliminar();" href="@Url.Content("~/Administrador/Eliminar?Id=")+ @omodel.idAdmin">Eliminar</a>
+                        <a class="btn btn-warning" href="@Url.Content("~/Administrador/Editar?Id=")+ @omodel.idAdmin" name="Editar"><i class="fas fa-user-edit"></i></a>
+                        <a class="btn btn-danger" onclick="return jsEliminar();" href="@Url.Content("~/Administrador/Eliminar?Id=")+ @omodel.idAdmin" name="Elimninar"><i class="fas fa-user-times"></i></a>
                     </td>
                 </tr>
             }

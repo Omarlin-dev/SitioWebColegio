@@ -12,8 +12,16 @@
 
         <div class="form-control">
             <label>Asignatura</label>
-            @Html.TextBoxFor(d => d.AsignaturaFirst.nombre, "", new { @class = "form-control" })
+            <select name="AsignaturaFirst.nombre" class="form-control">
+                <option value="">Seleccione</option>
+
+                @foreach (var omodel in Model.asignaturaList)
+                {
+                    <option value="@omodel.nombre">@omodel.nombre</option>
+                }
+            </select>
         </div>
+
         <div class="form-control">
             <label>Profesor</label>
             <select name="AsignaturaFirst.idProfesor" class="form-control">

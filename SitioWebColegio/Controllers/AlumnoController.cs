@@ -1,4 +1,6 @@
-﻿using SitioWebColegio.Models;
+﻿using Microsoft.Ajax.Utilities;
+using SitioWebColegio.Filtro;
+using SitioWebColegio.Models;
 using SitioWebColegio.Models.viewModels;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,7 @@ namespace SitioWebColegio.Controllers
     public class AlumnoController : Controller
     {
         // GET: Alumno
+        [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 8, idOperacionAlumno: 13)]
         public ActionResult TodosAlumnos()
         {
             var oAlumnos = new List<Alumno>();
@@ -23,6 +26,23 @@ namespace SitioWebColegio.Controllers
             return View(oAlumnos);
         }
 
+        [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 9, idOperacionAlumno: 14)]
+        public ActionResult DetalleAlumno(int Id)
+        {
+            var oAlumno = new alumnoViewModel();
+
+            using (DBColegioEntities db = new DBColegioEntities())
+            {
+                var Alumnodb = db.Alumno.FirstOrDefault(d => d.idAlumno == Id);
+
+                oAlumno.alumno = Alumnodb;
+
+                oAlumno.asignaturas = db.Asignatura.Where(d => d.idAlumno == Id).ToList();
+            }
+
+            return View(oAlumno);
+        }
+        [Autorizados(idOperacionadmin: 1)]
         public ActionResult TodosAlumnosAdmin()
         {
             ViewBag.mensajeEliminar = TempData["MensajeEliminarP"];
@@ -35,65 +55,13 @@ namespace SitioWebColegio.Controllers
             }
 
             return View(oAlumnos);
-        }
-         
-        public ActionResult DetalleAlumno(int Id)
-        {
-            var oAlumno = new alumnoViewModel();
-
-            using(DBColegioEntities db = new DBColegioEntities())
-            {
-                var Alumnodb = db.Alumno.FirstOrDefault(d => d.idAlumno == Id);
-
-                oAlumno.alumno = Alumnodb;
-
-                oAlumno.asignaturas = db.Asignatura.Where(d => d.idAlumno == Id).ToList();
-            }
-
-            return View(oAlumno);
-        }
-
-        public ActionResult CompanerosAlumnos(int Id)
-        {
-            var  lstAlumno = new AlumnoProfesorAsignaturaViewModel();
-            var oneAlumno = new alumnoViewModel();
-
-
-            using (var db = new DBColegioEntities())
-            {
-                lstAlumno.asignaturaList = AutoMapper.Mapper.Map<List<asignaturaViewModel>>(db.Asignatura.Where(d => d.idAlumno == Id));
-
-                lstAlumno.asignaturaList.ForEach(d =>
-                {
-                    oneAlumno.alumno= db.Alumno.FirstOrDefault(i => i.idAlumno == d.idAlumno);
-                    lstAlumno.alumnoList.Add(oneAlumno.alumno);
-                });
-
-                return View(lstAlumno);
-
-            }
-
-        }
-
-        public ActionResult IndexProfesoresAlumno(int Id)
-        {
-            var asignatura = new asignaturaViewModel();
-            var lstProfesores = new List<profesorViewModel>();
-             
-            using (var db = new DBColegioEntities())
-            {
-                asignatura = AutoMapper.Mapper.Map<asignaturaViewModel>(db.Asignatura.Where(d => d.idAlumno == Id));
-                lstProfesores = AutoMapper.Mapper.Map<List<profesorViewModel>>(db.Profesor.Where(d => d.idProfesor == asignatura.idProfesor).ToList());
-            }
-            return View(lstProfesores);
-        }       
-
-       
+        }        
+        [Autorizados(idOperacionadmin: 1)]
         public ActionResult NuevoAlumno()
         {
             return View();
         }
-
+        [Autorizados(idOperacionadmin: 1)]
         [HttpPost]
         public ActionResult NuevoAlumno(alumnoViewModel model)
         {
@@ -111,7 +79,7 @@ namespace SitioWebColegio.Controllers
             }
             return Redirect("TodosAlumnosAdmin");
         }
-
+        [Autorizados(idOperacionadmin: 1)]
         public ActionResult EditarAlumno(int Id)
         {
             alumnoViewModel model = new alumnoViewModel();
@@ -123,7 +91,7 @@ namespace SitioWebColegio.Controllers
             }
             return View(model);
         }
-
+        [Autorizados(idOperacionadmin: 1)]
         [HttpPost]
         public ActionResult EditarAlumno(alumnoViewModel model)
         {
@@ -142,13 +110,13 @@ namespace SitioWebColegio.Controllers
             return Redirect("TodosAlumnosAdmin");
 
         }
-
+        [Autorizados(idOperacionadmin: 1)]
         public ActionResult EliminarAlumno(int Id)
         {
             using (DBColegioEntities db = new DBColegioEntities())
             {
                 var alumnodb = db.Alumno.FirstOrDefault(d => d.idAlumno == Id);
-                TempData["MensajeEliminarP"] = "Alumno0/a: " + alumnodb.nombre + " Eliminado con exito";
+                TempData["MensajeEliminarP"] = "Alumno/a: " + alumnodb.nombre + " Eliminado con exito";
 
                 db.Alumno.Remove(alumnodb);
                 db.SaveChanges();
@@ -156,7 +124,7 @@ namespace SitioWebColegio.Controllers
             }
             return Redirect("TodosAlumnosAdmin");
         }
-
+        [Autorizados(idOperacionadmin: 1)]
         public ActionResult AsignaturaAlumno()
         {
             ViewBag.mensajeEliminar = TempData["MensajeEliminarA"];
@@ -170,7 +138,7 @@ namespace SitioWebColegio.Controllers
 
             return View(model);
         }
-
+        [Autorizados(idOperacionadmin: 1)]
         public ActionResult AsignaturaNuevoAlumno()
         {
             var model = new AlumnoProfesorAsignaturaViewModel();
@@ -186,7 +154,7 @@ namespace SitioWebColegio.Controllers
 
             return View(model);
         }
-
+        [Autorizados(idOperacionadmin: 1)]
         [HttpPost]
         public ActionResult AsignaturaNuevoAlumno(AlumnoProfesorAsignaturaViewModel omodel)
         {
@@ -206,7 +174,7 @@ namespace SitioWebColegio.Controllers
             return Redirect("AsignaturaAlumno");
 
         }
-
+        [Autorizados(idOperacionadmin: 1)]
         public ActionResult AsignaturaEditarAlumno(int Id)
         {
             var model = new AlumnoProfesorAsignaturaViewModel();
@@ -222,7 +190,7 @@ namespace SitioWebColegio.Controllers
 
             return View(model);
         }
-
+        [Autorizados(idOperacionadmin: 1)]
         [HttpPost]
         public ActionResult AsignaturaEditarAlumno(AlumnoProfesorAsignaturaViewModel omodel)
         {
@@ -243,7 +211,7 @@ namespace SitioWebColegio.Controllers
             return Redirect("AsignaturaAlumno");
 
         }
-         
+        [Autorizados(idOperacionadmin: 1)]
         public ActionResult AsignaturaEliminarAlumno(int Id)
         {
             using (DBColegioEntities db = new DBColegioEntities())

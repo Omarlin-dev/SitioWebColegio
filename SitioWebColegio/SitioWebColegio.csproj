@@ -132,10 +132,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="AutomapperConfig\AutomapperProfile.cs" />
+    <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\AdministradorController.cs" />
     <Compile Include="Controllers\AlumnoController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfesorController.cs" />
+    <Compile Include="Filtro\Autorizados.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -176,6 +179,7 @@
     <Compile Include="Models\viewModels\AlumnoProfesorAsignaturaViewModel.cs" />
     <Compile Include="Models\viewModels\alumnoViewModel.cs" />
     <Compile Include="Models\viewModels\asignaturaViewModel.cs" />
+    <Compile Include="Models\viewModels\LoginViewModel.cs" />
     <Compile Include="Models\viewModels\profesorViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -199,6 +203,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Imagenes\bgLogin.jpg" />
     <Content Include="Models\db.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>db.Context.cs</LastGenOutput>
@@ -286,12 +291,16 @@
     <Content Include="Views\Alumno\TodosAlumnos.cshtml" />
     <Content Include="Views\Alumno\DetalleAlumno.cshtml" />
     <Content Include="Views\Alumno\TodosAlumnosAdmin.cshtml" />
-    <Content Include="Views\Alumno\CompanerosAlumnos.cshtml" />
     <Content Include="Views\Alumno\NuevoAlumno.cshtml" />
     <Content Include="Views\Alumno\EditarAlumno.cshtml" />
     <Content Include="Views\Alumno\AsignaturaAlumno.cshtml" />
     <Content Include="Views\Alumno\AsignaturaNuevoAlumno.cshtml" />
     <Content Include="Views\Alumno\AsignaturaEditarAlumno.cshtml" />
+    <Content Include="Views\Alumno\CompanerosClase.cshtml" />
+    <Content Include="Views\Alumno\CompanerosAlumnoClase.cshtml" />
+    <Content Include="Views\Acceso\Login.cshtml" />
+    <Content Include="Views\Shared\LayoutLogin.cshtml" />
+    <Content Include="Views\Error\NoAutorizado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

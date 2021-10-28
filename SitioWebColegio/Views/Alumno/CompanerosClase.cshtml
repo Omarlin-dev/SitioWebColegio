@@ -1,0 +1,36 @@
+﻿@model SitioWebColegio.Models.viewModels.AlumnoProfesorAsignaturaViewModel
+@{
+    ViewBag.Title = "Alumnos";
+    Layout = "~/Views/Shared/LayoutProfesor.cshtml";
+}
+
+<h3>Alumnos</h3>
+
+
+<div>
+    <table class="table table-bordered table-hover" style="width: 100%">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Telefono</th>
+                <th>Ver mas</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var omodel in Model.alumnoList)
+            {
+
+                <tr>
+                    <td>@omodel.idAlumno</td>
+                    <td>@omodel.nombre</td>
+                    <td>@omodel.apellido</td>
+                    <td>@omodel.telefono</td>
+                    <td><a href="@Url.Content("~/Alumno/DetalleAlumno?Id=") + @omodel.idAlumno" class="btn btn-outline-primary">Detalle</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

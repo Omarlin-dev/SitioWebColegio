@@ -40,8 +40,8 @@
                     <td>@omodel.idProfesor</td>
                     <td>@omodel.idAlumno</td>
                     <td>
-                        <a href="@Url.Content("~/Profesor/AsignaturaEditar?Id=") + @omodel.idProfesor" class="btn btn-outline-warning">Editar</a>
-                        <a onclick="return jsEliminar();" href="@Url.Content("~/Profesor/AsignaturaEliminar?Id=") + @omodel.idAsignatura" class="btn btn-outline-danger">Eliminar</a>
+                        <a href="@Url.Content("~/Profesor/AsignaturaEditar?Id=") + @omodel.idProfesor" class="btn btn-outline-warning" name="Editar"><i class="fas fa-user-edit"></i></a>
+                        <a onclick="return jsEliminar();" href="@Url.Content("~/Profesor/AsignaturaEliminar?Id=") + @omodel.idAsignatura" class="btn btn-outline-danger" name="Elimninar"><i class="fas fa-user-times"></i></a>
                     </td>
                 </tr>
             }

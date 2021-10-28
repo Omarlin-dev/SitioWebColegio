@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/LayoutAdministrador.cshtml";
 }
 
-<h3>Bienvenido Administrador A la sesion de Profesores</h3>
+<h3>Admin sesion de Profesores</h3>
 
 @if (ViewBag.mensajeEliminar != null)
 {
@@ -39,9 +39,9 @@
                     <td>@omodel.apellido</td>
                     <td>@omodel.especialidad</td>
                     <td>
-                        <a href="@Url.Content("~/Profesor/DetalleProfesor?Id=") + @omodel.idProfesor" class="btn btn-outline-primary">Detalle</a>
-                        <a href="@Url.Content("~/Profesor/Editar?Id=") + @omodel.idProfesor" class="btn btn-outline-warning">Editar</a>
-                        <a onclick="return jsEliminar();" href="@Url.Content("~/Profesor/Eliminar?Id=") + @omodel.idProfesor" class="btn btn-outline-danger">Eliminar</a>
+                        <a href="@Url.Content("~/Profesor/DetalleProfesor?Id=") + @omodel.idProfesor" class="btn btn-outline-primary" name="Ver mas"><i class="fas fa-plus-circle"></i></a>
+                        <a href="@Url.Content("~/Profesor/Editar?Id=") + @omodel.idProfesor" class="btn btn-outline-warning" name="Editar"><i class="fas fa-user-edit"></i></a>
+                        <a onclick="return jsEliminar();" href="@Url.Content("~/Profesor/Eliminar?Id=") + @omodel.idProfesor" class="btn btn-outline-danger" name="Elimninar"><i class="fas fa-user-times"></i></a>
                     </td>
                 </tr>
             }
