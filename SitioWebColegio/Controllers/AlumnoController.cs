@@ -16,14 +16,29 @@ namespace SitioWebColegio.Controllers
         [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 8, idOperacionAlumno: 13)]
         public ActionResult TodosAlumnos()
         {
-            var oAlumnos = new List<Alumno>();
+            return View();
 
-            using (DBColegioEntities db = new DBColegioEntities())
+        }
+
+        public ActionResult GetDataAlumnosTodos()
+        {
+
+            List<AlumnosViewModels> lst = new List<AlumnosViewModels>();
+            using (var db = new DBColegioEntities())
             {
-                oAlumnos = db.Alumno.ToList();
+                lst = (from d in db.Alumno
+                       select new AlumnosViewModels
+                       {
+                           idAlumno = d.idAlumno,
+                           nombre = d.nombre,
+                           apellido = d.apellido,
+                           telefono = d.telefono
+                       }).ToList();
+
             }
 
-            return View(oAlumnos);
+            return Json(new { data = lst }, JsonRequestBehavior.AllowGet);
+
         }
 
         [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 9, idOperacionAlumno: 14)]
@@ -47,15 +62,23 @@ namespace SitioWebColegio.Controllers
         {
             ViewBag.mensajeEliminar = TempData["MensajeEliminarP"];
 
-            var oAlumnos = new List<Alumno>();
+            return View();
+        }
 
-            using (DBColegioEntities db = new DBColegioEntities())
+        public ActionResult GetDataAlumnos()
+        {
+
+            List<AlumnosViewModels> lst = new List<AlumnosViewModels>();
+            using (var db = new DBColegioEntities())
             {
-                oAlumnos = db.Alumno.ToList();
+                lst = AutoMapper.Mapper.Map<List<AlumnosViewModels>>(db.Alumno.ToList());
+
             }
 
-            return View(oAlumnos);
-        }        
+            return Json(new { data = lst }, JsonRequestBehavior.AllowGet);
+
+        }
+
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult NuevoAlumno()
         {
@@ -128,16 +151,21 @@ namespace SitioWebColegio.Controllers
         public ActionResult AsignaturaAlumno()
         {
             ViewBag.mensajeEliminar = TempData["MensajeEliminarA"];
+                   
+            return View();
+        }
 
-            var model = new AlumnoProfesorAsignaturaViewModel();
-
+        public ActionResult GetDataAlumnosAsignaturas()
+        {
+            var lst = new List<asignaturaViewModel>();
             using (DBColegioEntities db = new DBColegioEntities())
             {
-                model.asignaturaList = AutoMapper.Mapper.Map<List<asignaturaViewModel>>(db.Asignatura.ToList());
+                lst = AutoMapper.Mapper.Map<List<asignaturaViewModel>>(db.Asignatura.ToList());
             }
 
-            return View(model);
+            return Json(new { data = lst }, JsonRequestBehavior.AllowGet);
         }
+
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult AsignaturaNuevoAlumno()
         {

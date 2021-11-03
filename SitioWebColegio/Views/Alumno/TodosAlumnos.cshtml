@@ -1,36 +1,71 @@
-﻿@model List<SitioWebColegio.Models.Alumno>
-@{
+﻿@{
     ViewBag.Title = "Alumnos";
     Layout = "~/Views/Shared/LayoutProfesor.cshtml";
+
 }
 
-<h3>Alumnos</h3>
+<h4 class="text-center">Alumnos</h4>
+<style>
+    .fas {
+        font-size: 18px;
+    }
+
+    .dataTables_filter {
+        float: left !important;
+    }
+</style>
+
+@if (ViewBag.mensajeEliminar != null)
+{
+    <div class="alert alert-danger text-center" style="height: 65px;" role="alert">
+        <p>@ViewBag.mensajeEliminar</p>
+    </div>
+}
 
 
 <div>
-    <table class="table table-bordered table-hover" style="width: 100%">
+    <table class="table table-bordered table-hover w-100" id="datatable">
         <thead>
             <tr>
                 <th>#</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Telefono</th>
-                <th>Ver mas</th>
+
             </tr>
         </thead>
-        <tbody>
-            @foreach (var omodel in Model)
-            {
-
-                <tr>
-                    <td>@omodel.idAlumno</td>
-                    <td>@omodel.nombre</td>
-                    <td>@omodel.apellido</td>
-                    <td>@omodel.telefono</td>
-                    <td><a href="@Url.Content("~/Alumno/DetalleAlumno?Id=") + @omodel.idAlumno" class="btn btn-outline-primary">Detalle</a></td>
-                </tr>
-            }
-        </tbody>
     </table>
 </div>
 
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        var dataTable;
+        $(document).ready(function () {
+            dataTable = $("#datatable").DataTable({
+                "ajax": {
+                    "url": "/Alumno/GetDataAlumnos",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "idAlumno" },
+                    { "data": "nombre" },
+                    { "data": "apellido" },
+                    { "data": "telefono" }
+
+
+                ],
+                "language": {
+
+                    "emptyTable" : "No tiene Datos, porfavor presecione click en <b>Nuevo</b> Button"
+                }
+            });
+        });
+
+    </script>
+}

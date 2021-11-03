@@ -1,12 +1,18 @@
-﻿@model List<SitioWebColegio.Models.Alumno>
-@{
+﻿@{
     ViewBag.Title = "Alumnos";
     Layout = "~/Views/Shared/LayoutAdministrador.cshtml";
-
 }
 
-<h3>Alumnos Admin</h3>
+<h4 class="text-center">Alumnos</h4>
+<style>
+    .fas {
+        font-size: 18px;
+    }
 
+    .dataTables_filter {
+        float: left !important;
+    }
+</style>
 
 @if (ViewBag.mensajeEliminar != null)
 {
@@ -14,44 +20,68 @@
         <p>@ViewBag.mensajeEliminar</p>
     </div>
 }
-<div style="max-width: 95%">
-    <a class="btn btn-success" href="@Url.Content("~/Alumno/NuevoAlumno")">Nuevo</a>
-    <a class="btn btn-outline-info float-end" href="@Url.Content("~/Alumno/AsignaturaAlumno")">Asignatura</a>
 
-    <table class="table table-bordered table-hover" style="width: 100%">
+<a class="btn btn-success" href="@Url.Content("~/Alumno/NuevoAlumno")">Nuevo</a>
+<a class="btn btn-outline-primary float-end" href="@Url.Content("~/Alumno/AsignaturaAlumno")">Asignatura</a>
+
+
+<div>
+    <table class="table table-bordered table-hover w-100" id="datatable">
         <thead>
             <tr>
                 <th>#</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Telefono</th>
-                <th>Ver mas</th>
+                <th>Nombre Usuario</th>
+                <th>Acciones</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach (var omodel in Model)
-            {
-
-                <tr>
-                    <td>@omodel.idAlumno</td>
-                    <td>@omodel.nombre</td>
-                    <td>@omodel.apellido</td>
-                    <td>@omodel.telefono</td>
-                    <td>
-                        <a href="@Url.Content("~/Alumno/DetalleAlumno?Id=") + @omodel.idAlumno" class="btn btn-outline-primary" name="Ver mas"><i class="fas fa-plus-circle"></i></a> 
-                        <a href="@Url.Content("~/Alumno/EditarAlumno?Id=") + @omodel.idAlumno" class="btn btn-outline-warning" name="Editar"><i class="fas fa-user-edit"></i></a>
-                        <a onclick="return jsEliminar();" href="@Url.Content("~/Alumno/EliminarAlumno?Id=") + @omodel.idAlumno" class="btn btn-outline-danger" name="Eliminar"><i class="fas fa-user-times"></i></a>                    </td>
-                </tr>
-            }
-        </tbody>
     </table>
 </div>
 
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-<script>
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        var dataTable;
+        $(document).ready(function () {
+            dataTable = $("#datatable").DataTable({
+                "ajax": {
+                    "url": "/Alumno/GetDataAlumnos",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "idAlumno" },
+                    { "data": "nombre" },
+                    { "data": "apellido" },
+                    { "data": "telefono" },
+                    { "data": "nombreUsuario" },
+
+                    {
+                        "data": "idAlumno", "render": function (data) {
+                            return "<a class='btn btn-primary' href='@Url.Content("~/Alumno/DetalleAlumno?Id=")" + data + "')><i class='fas fa-eye'></i>Ver Mas</a> <a class='btn btn-warning' href='@Url.Content("~/Alumno/EditarAlumno?Id=")" + data + "')><i class='fa fa-pencil'></i> Editar</a><a class='btn btn-danger' style='margin-left:5px' onclick='return jsEliminar();' href='@Url.Content("~/Alumno/EliminarAlumno?Id=")" + data + "')><i class='fa fa-trash'></i> Eliminar</a>";
+                        },
+
+
+                        "searchable":false,
+                        "width":"150px"
+                    }
+
+                ],
+                "language": {
+
+                    "emptyTable" : "No tiene Datos, porfavor presecione click en <b>Nuevo</b> Button"
+                }
+            });
+        });
 
     function jsEliminar() {
         return confirm("Estas Seguro que deseas eliminar este registro?");
     }
-
-</script>
+    </script>
+}

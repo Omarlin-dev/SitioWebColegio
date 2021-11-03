@@ -6,9 +6,16 @@
 
 }
 
-<h2>Editar Alumno</h2>
 
-<div class="text-center justify-content-center" style="max-width: 50%;">
+<h2>
+    <a style="float: right; color: blue" href="@Url.Content("~/Alumno/TodosAlumnosAdmin")"><i class="fas fa-arrow-alt-circle-left"></i></a>
+
+</h2>
+
+<div class="text-center justify-content-center m-auto" style="max-width: 50%;">
+
+    <h4>Editar Alumno</h4>
+
     <form action="@Url.Content("~/Alumno/EditarAlumno")" method="post" class="form-control">
 
         @Html.HiddenFor(d => d.alumno.idAlumno)
@@ -16,7 +23,9 @@
         <div class="form-control">
             <label for="nombre">Nombre</label>
             @Html.TextBoxFor(d => d.alumno.nombre, "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(d => d.alumno.nombre, "", new { @class = "danger" })
+            @Html.ValidationMessageFor(d => d.alumno.nombre, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(d => d.alumno.nombre, "", new { @class = "text-danger" })
+
 
         </div>
         <div class="form-control">
@@ -26,22 +35,25 @@
         <div class="form-control">
             <label for="nombreusuario">Nombre de Usuario</label>
             @Html.TextBoxFor(d => d.alumno.nombreUsuario, "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(d => d.alumno.nombreUsuario, "", new { @class = "danger" })
+            @Html.ValidationMessageFor(d => d.alumno.nombreUsuario, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(d => d.alumno.nombreUsuario, "", new { @class = "text-danger" })
+
 
         </div>
         <div class="form-control">
             <label for="clave">Clave</label>
             <input type="password" name="alumno.clave" class="form-control" />
-            @Html.ValidationMessageFor(d => d.alumno.clave, "", new { @class = "danger" })
+            @Html.ValidationMessageFor(d => d.alumno.clave, "", new { @class = "text-danger" })
+
 
         </div>
         <div class="form-control">
             <label for="especialidad">Telefono</label>
             @Html.TextBoxFor(d => d.alumno.telefono, "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(d => d.alumno.telefono, "", new { @class = "danger" })
+            @Html.ValidationMessageFor(d => d.alumno.telefono, "", new { @class = "text-danger" })
 
         </div>
-  <div class="text-end float-end">
+        <div class="text-end float-end">
             <input type="submit" value="Enviar" class="btn btn-outline-success" />
         </div>
     </form>

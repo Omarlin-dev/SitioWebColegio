@@ -15,8 +15,8 @@ namespace SitioWebColegio.AutomapperConfig
             CreateMap<Administrador, administradorViewModel>();
             CreateMap<administradorViewModel, Administrador>();
 
-            CreateMap<Alumno, alumnoViewModel>();
-            CreateMap<alumnoViewModel, Alumno>();
+            CreateMap<Alumno, AlumnosViewModels>();
+            CreateMap<AlumnosViewModels, Alumno>();
 
             CreateMap<Asignatura, asignaturaViewModel>();
             CreateMap<asignaturaViewModel, Asignatura>();

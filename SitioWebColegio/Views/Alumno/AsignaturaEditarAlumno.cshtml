@@ -5,10 +5,13 @@
 
 }
 
-<h2>Editar Asignatura Alumno</h2>
+<h2>
+    <a style="float: right; color: blue" href="@Url.Content("~/Alumno/AsignaturaAlumno")"><i class="fas fa-arrow-alt-circle-left"></i></a>
+</h2>
 
 
-<div class="text-center justify-content-center" style="max-width: 50%;">
+<div class="text-center justify-content-center m-auto" style="max-width: 50%;">
+    <h4>Editar Asignatura Alumno</h4>
     <form action="@Url.Content("~/Alumno/AsignaturaEditarAlumno")" method="post" class="form-control">
 
         @Html.HiddenFor(d => d.AsignaturaFirst.idAsignatura)
@@ -23,8 +26,10 @@
                     <option value="@omodel.nombre">@omodel.nombre</option>
                 }
             </select>
+            @Html.ValidationMessageFor(d => d.AsignaturaFirst.nombre, "", new { @class = "text-danger" })
         </div>
 
+       
         <div class="form-control">
             <label>Profesor</label>
             <select name="AsignaturaFirst.idProfesor" class="form-control">
@@ -35,11 +40,12 @@
                     <option value="@omodel.idProfesor">@omodel.nombre</option>
                 }
             </select>
+            @Html.ValidationMessageFor(d => d.AsignaturaFirst.idProfesor, "", new { @class = "text-danger" })
+
         </div>
 
         <div class="form-control">
             <label>Alumno</label>
-
             <select name="AsignaturaFirst.idAlumno" class="form-control">
                 <option value="">Seleccione</option>
 
@@ -48,6 +54,8 @@
                     <option value="@omodel.idAlumno">@omodel.nombre</option>
                 }
             </select>
+            @Html.ValidationMessageFor(d => d.AsignaturaFirst.idAlumno, "", new { @class = "text-danger" })
+
         </div>
 
         <div class="text-end float-end">

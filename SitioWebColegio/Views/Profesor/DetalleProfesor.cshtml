@@ -6,7 +6,15 @@
 }
 
 <h2>
-    <a style="float: right; color: blue" href="@Url.Content("~/Profesor/IndexProfesores")"><i class="fas fa-arrow-alt-circle-left"></i></a>
+    @if (Session["Administrador"] == null)
+    {
+        <a style="float: right; color: blue" href="@Url.Content("~/Profesor/IndexProfesores")"><i class="fas fa-arrow-alt-circle-left"></i></a>
+    }
+    else
+    {
+        <a style="float: right; color: blue" href="@Url.Content("~/Profesor/IndexAdmin")"><i class="fas fa-arrow-alt-circle-left"></i></a>
+
+    }
     Detalle Profesor
 </h2>
 

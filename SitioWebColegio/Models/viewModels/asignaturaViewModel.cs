@@ -11,7 +11,9 @@ namespace SitioWebColegio.Models.viewModels
         public int idAsignatura { get; set; }
         [Required]
         public string nombre { get; set; }
+        [Required]
         public int idProfesor { get; set; }
+        [Required]
         public Nullable<int> idAlumno { get; set; }
     }
 }

@@ -5,15 +5,19 @@
 
 }
 
-<h2>Nuevo</h2>
 
+<h2>
+    <a style="float: right; color: blue" href="@Url.Content("~/Administrador/Index")"><i class="fas fa-arrow-alt-circle-left"></i></a>
+</h2>
 
-<div class="text-center justify-content-center" style="max-width: 50%;">
+<div class="text-center justify-content-center m-auto" style="max-width: 50%;">
+    <h4>Nuevo</h4>
+
     <form action="@Url.Content("~/Administrador/Nuevo")" method="post" class="form-control">
         <div class="form-control">
             <label for="nombre">Nombre</label>
             @Html.TextBoxFor(d => d.nombre, "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(d => d.nombre, "", new { @class = "danger" })
+            @Html.ValidationMessageFor(d => d.nombre, "", new { @class = "text-danger" })
         </div>
         <div class="form-control">
             <label for="apellido">Apellido</label>
@@ -22,18 +26,18 @@
         <div class="form-control">
             <label for="nombreusuario">Nombre de Usuario</label>
             @Html.TextBoxFor(d => d.nombreusuario, "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(d => d.nombreusuario, "", new { @class = "danger" })
+            @Html.ValidationMessageFor(d => d.nombreusuario, "", new { @class = "text-danger" })
 
         </div>
         <div class="form-control">
             <label for="clave">Clave</label>
             <input type="password" name="clave" class="form-control" />
-            @Html.ValidationMessageFor(d => d.clave, "", new { @class = "danger" })
+            @Html.ValidationMessageFor(d => d.clave, "", new { @class = "text-danger" })
 
         </div>
 
         <div class="text-end float-end">
-            <input type="submit" value="Enviar" class="btn btn-success"/>
+            <input type="submit" value="Enviar" class="btn btn-success" />
         </div>
     </form>
 </div>

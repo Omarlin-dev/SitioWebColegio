@@ -177,6 +177,7 @@
     </Compile>
     <Compile Include="Models\viewModels\administradorViewModel.cs" />
     <Compile Include="Models\viewModels\AlumnoProfesorAsignaturaViewModel.cs" />
+    <Compile Include="Models\viewModels\AlumnosViewModels.cs" />
     <Compile Include="Models\viewModels\alumnoViewModel.cs" />
     <Compile Include="Models\viewModels\asignaturaViewModel.cs" />
     <Compile Include="Models\viewModels\LoginViewModel.cs" />
@@ -204,6 +205,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Imagenes\bgLogin.jpg" />
+    <Content Include="img\Em.png" />
+    <Content Include="img\Emma.ico" />
     <Content Include="Models\db.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>db.Context.cs</LastGenOutput>

@@ -4,7 +4,17 @@
     Layout = "~/Views/Shared/LayoutAdministrador.cshtml";
 }
 
-<h2>Bienvenido Administrador</h2>
+<h4 class="text-center">Bienvenido Administrador</h4>
+<style>
+    .fas {
+        font-size: 18px;
+    }
+
+    .dataTables_filter {
+        float: left !important;
+    }
+</style>
+
 @if (ViewBag.mensajeEliminar != null)
 {
     <div class="alert alert-danger text-center" style="height: 65px;" role="alert">
@@ -15,7 +25,7 @@
 <a class="btn btn-success" href="@Url.Content("~/Administrador/Nuevo")">Nuevo</a>
 
 <div>
-    <table class="table table-bordered table-hover" style="width: 100%">
+    <table class="table table-bordered table-hover w-100" id="datatable">
         <thead>
             <tr>
                 <th>#</th>
@@ -25,30 +35,49 @@
                 <th>Acciones</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach (var omodel in Model)
-            {
-
-                <tr>
-                    <td>@omodel.idAdmin</td>
-                    <td>@omodel.nombre</td>
-                    <td>@omodel.apellido</td>
-                    <td>@omodel.nombreusuario</td>
-                    <td>
-                        <a class="btn btn-warning" href="@Url.Content("~/Administrador/Editar?Id=")+ @omodel.idAdmin" name="Editar"><i class="fas fa-user-edit"></i></a>
-                        <a class="btn btn-danger" onclick="return jsEliminar();" href="@Url.Content("~/Administrador/Eliminar?Id=")+ @omodel.idAdmin" name="Elimninar"><i class="fas fa-user-times"></i></a>
-                    </td>
-                </tr>
-            }
-        </tbody>
     </table>
 </div>
 
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
-<script>
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        var dataTable;
+        $(document).ready(function () {
+            dataTable = $("#datatable").DataTable({
+                "ajax": {
+                    "url": "/Administrador/GetData",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "idAdmin" },
+                    { "data": "nombre" },
+                    { "data": "apellido" },
+                    { "data": "nombreusuario" },
+                    {
+                        "data": "idAdmin", "render": function (data) {
+                            return "<a class='btn btn-warning' href='@Url.Content("~/Administrador/Editar?Id=")" + data + "')><i class='fa fa-pencil'></i> Editar</a><a class='btn btn-danger' style='margin-left:5px' onclick='return jsEliminar();' href='@Url.Content("~/Administrador/Eliminar?Id=")" + data + "')><i class='fa fa-trash'></i> Eliminar</a>";
+                        },
+
+                        
+                        "searchable":false,
+                        "width":"150px"
+                    }
+
+                ],
+                "language": {
+
+                    "emptyTable" : "No tiene Datos, porfavor presecione click en <b>Nuevo</b> Button"
+                }
+            });
+        });
 
     function jsEliminar() {
         return confirm("Estas Seguro que deseas eliminar este registro?");
     }
-
-</script>
+    </script>
+}

@@ -11,7 +11,8 @@ namespace SitioWebColegio.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Alumno
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,10 +22,14 @@ namespace SitioWebColegio.Models
         }
     
         public int idAlumno { get; set; }
+        [Required]
         public string nombre { get; set; }
         public string apellido { get; set; }
+        [Required]
         public string telefono { get; set; }
+        [Required]
         public string nombreUsuario { get; set; }
+        [Required]
         public string clave { get; set; }
         public Nullable<bool> estado { get; set; }
         public Nullable<int> idRol { get; set; }

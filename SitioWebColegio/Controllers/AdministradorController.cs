@@ -15,16 +15,22 @@ namespace SitioWebColegio.Controllers
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult Index()
         {
-            ViewBag.mensajeEliminar = TempData["MensajeEliminar"];
+            ViewBag.mensajeEliminar = TempData["MensajeEliminar"];          
 
+            return View();
+        }
+
+        public ActionResult GetData()
+        {
             List<administradorViewModel> lst = new List<administradorViewModel>();
             using (var db = new DBColegioEntities())
             {
                 lst = AutoMapper.Mapper.Map<List<administradorViewModel>>(db.Administrador.ToList());
 
             }
-
-            return View(lst);
+           
+                return Json(new { data = lst }, JsonRequestBehavior.AllowGet);
+            
         }
 
         [Autorizados(idOperacionadmin: 1)]
@@ -77,7 +83,7 @@ namespace SitioWebColegio.Controllers
                 db.Entry(admin).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
-            return View();
+            return Redirect("Index");
         }
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult Eliminar(int Id)

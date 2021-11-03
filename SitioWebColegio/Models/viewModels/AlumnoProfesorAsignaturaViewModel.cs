@@ -14,7 +14,7 @@ namespace SitioWebColegio.Models.viewModels
 
         public List<asignaturaViewModel> asignaturaList { get; set; }
 
-        public virtual asignaturaViewModel AsignaturaFirst { get; set; }
+        public asignaturaViewModel AsignaturaFirst { get; set; }
         public virtual Alumno alumno { get; set; } 
 
     }
