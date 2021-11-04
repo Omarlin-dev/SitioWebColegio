@@ -23,5 +23,40 @@ namespace SitioWebColegio.Controllers
         {
             return View();
         }
+
+        public ActionResult Administracion()
+        {
+            return View();
+        }
+
+        public ActionResult Contabilidad()
+        {
+            return View();
+        }
+
+        public ActionResult Electricidad()
+        {
+            return View();
+        }
+
+        public ActionResult Electronica()
+        {
+            return View();
+        }
+
+        public ActionResult Informatica()
+        {
+            return View();
+        }
+
+        public ActionResult Mercadeo()
+        {
+            return View();
+        }
+
+        public ActionResult Refigeracion()
+        {
+            return View();
+        }
     }
 }
