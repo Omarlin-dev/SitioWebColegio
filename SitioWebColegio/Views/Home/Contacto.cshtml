@@ -1,7 +1,110 @@
 ﻿
-@{
-    ViewBag.Title = "Contacto";
-}
+@{ ViewBag.Title = "Contacto"; }
 
-<h2>Contacto</h2>
+
+<link href="~/css/EstilosContacto.css" rel="stylesheet" />
+<link href="~/css/StylesContacto2.css" rel="stylesheet" />
+
+<script src="https://kit.fontawesome.com/6ede4f85d9.js" crossorigin="anonymous"></script>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-12 col-lg">
+
+            <h2>Información de contacto</h2>
+
+            <ul>
+                <li><strong>Tel.</strong><p>(829) 421-5051</p></li>
+                <li><strong>E-mail</strong><p><a href="mailto:centroemmabalaguer@gmail.com" target="_blank" id="vinculo">centroemmabalaguer@gmail.com</a></p></li>
+                <li><strong>Facebook</strong><p><a href="https://www.facebook.com/emma.balaguer.9" target="_blank" id="vinculo">Centro Emma Valaguer</a></p></li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-lg">
+
+                <h2>Ubicación</h2>
+
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1891.3053309089755!2d-69.8568683420789!3d18.546488139761255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8eaf85fe3b3a607b%3A0xf1c37127f64b5f8b!2sEscuela%20Emma%20Balaguer%20de%20Vallejo!5e0!3m2!1ses-419!2sdo!4v1635111514062!5m2!1ses-419!2sdo" width="450" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+
+            <h3>Dudas y/o sugerencias</h3>
+
+            <form id="form" action="https://formspree.io/f/xjvjqood" method="POST">
+
+                <div class="row">
+                    <div class="col-12 col-lg-3">
+                        <label for="nombre" class="form-label"><strong>Nombre</strong></label>
+                        <input name="name" type="text" required class="form-control" id="nombre">
+                    </div>
+
+                    <div class="col-12 col-lg-3">
+                        <label for="nombre" class="form-label"><strong>Correo</strong></label>
+                        <input name="email" required type="email" class="form-control" id="correo">
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6">
+                    <label for="nombre" class="form-label"><strong>Asunto</strong></label>
+                    <input name="affair" type="text" required class="form-control" id="asunto">
+                </div>
+
+                <div class="col-12 col-lg-6">
+                    <label for="texto" class="form-label"><strong>Mensaje</strong></label>
+                    <textarea name="message" required type="text" class="form-control" id="message" rows="3" style="resize: none;"></textarea>
+
+                    <br>
+
+                    <button class="col-12 col-lg-12" id="submit" type="submit"><a href="mailto:omarlingarcesrodriguez@gmail.com" id="send" style="text-decoration: none; color: #fff">Enviar</a></button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+<script>const cleanInputs = () => [...document.getElementById('form').getElementsByClassName('form-control')].forEach(e => e.value = "");
+
+    var enviar = document.getElementById('submit')
+
+
+    const $form = document.querySelector('#form')
+
+    $form.addEventListener('submit', handleSubmit)
+
+    async function handleSubmit(event) {
+        event.preventDefault()
+
+        // cleanInputs();
+
+        const form = new FormData(this)
+        const response = await fetch(this.action, {
+            method: this.method,
+            body: form,
+            header: {
+                'Accept': 'aplication/json'
+            }
+        })
+
+        cleanInputs();
+
+    }
+    document.getElementById('form').addEventListener('submit', () => [...document.getElementById('form').getElementsByClassName('form-control')].forEach(e => e.value = ""))</script>
+
+
+<br>
+<br>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
 

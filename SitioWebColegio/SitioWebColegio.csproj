@@ -271,6 +271,7 @@
     <Content Include="img\xd1.jpg" />
     <Content Include="img\xd8.jpg" />
     <Content Include="img\xd9.jpg" />
+    <Content Include="js\JsExcel.js" />
     <Content Include="js\lightbox.js" />
     <Content Include="Models\db.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

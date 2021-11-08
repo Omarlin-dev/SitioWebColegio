@@ -12,7 +12,7 @@ namespace SitioWebColegio.Controllers
     public class ProfesorController : Controller
     {
         // GET: Profesores
-        [Autorizados(idOperacionadmin:1, idOperacionProfesor:6, idOperacionAlumno:11)]
+        [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 6, idOperacionAlumno: 11)]
         public ActionResult IndexProfesores()
         {
             return View();
@@ -63,16 +63,16 @@ namespace SitioWebColegio.Controllers
             return View();
         }
 
-        public  ActionResult GetDataProfesores()
+        public ActionResult GetDataProfesores()
         {
             var lst = new List<profesorViewModel>();
-            using(DBColegioEntities db = new DBColegioEntities())
+            using (DBColegioEntities db = new DBColegioEntities())
             {
                 lst = AutoMapper.Mapper.Map<List<profesorViewModel>>(db.Profesor.ToList());
             }
 
             return Json(new { data = lst }, JsonRequestBehavior.AllowGet);
-         }
+        }
 
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult Nuevo()
@@ -143,7 +143,7 @@ namespace SitioWebColegio.Controllers
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult Asignatura()
         {
-            ViewBag.mensajeEliminar = TempData["MensajeEliminarA"];                                                                                                                                                             
+            ViewBag.mensajeEliminar = TempData["MensajeEliminarA"];
             return View();
         }
 
@@ -176,20 +176,20 @@ namespace SitioWebColegio.Controllers
         }
         [Autorizados(idOperacionadmin: 1)]
         [HttpPost]
-    public ActionResult AsignaturaNuevo(AlumnoProfesorAsignaturaViewModel omodel)
-    {
+        public ActionResult AsignaturaNuevo(AlumnoProfesorAsignaturaViewModel omodel)
+        {
 
             if (!ModelState.IsValid)
                 return View(omodel);
 
             using (DBColegioEntities db = new DBColegioEntities())
-        {
-          var asignaturadb = AutoMapper.Mapper.Map<Asignatura>(omodel.AsignaturaFirst);
+            {
+                var asignaturadb = AutoMapper.Mapper.Map<Asignatura>(omodel.AsignaturaFirst);
 
                 db.Asignatura.Add(asignaturadb);
 
                 db.SaveChanges();
-        }
+            }
 
             return Redirect("Asignatura");
 
@@ -204,6 +204,8 @@ namespace SitioWebColegio.Controllers
                 model.AsignaturaFirst = AutoMapper.Mapper.Map<asignaturaViewModel>(db.Asignatura.FirstOrDefault(d => d.idAsignatura == Id));
                 model.profesorList = AutoMapper.Mapper.Map<List<profesorViewModel>>(db.Profesor.ToList());
                 model.alumnoList = db.Alumno.ToList();
+                model.profesorFirts = AutoMapper.Mapper.Map<profesorViewModel>(db.Profesor.FirstOrDefault(d => d.idProfesor == model.AsignaturaFirst.idProfesor));
+                model.alumno = db.Alumno.FirstOrDefault(d => d.idAlumno == model.AsignaturaFirst.idAlumno);
 
                 model.asignaturaList = AutoMapper.Mapper.Map<List<asignaturaViewModel>>(db.Asignatura.ToList());
             }
@@ -244,7 +246,7 @@ namespace SitioWebColegio.Controllers
 
             }
             return Redirect("Asignatura");
-    }
         }
-   
+    }
+
 }

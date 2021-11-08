@@ -18,8 +18,8 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                <ul class="navbar-nav m-auto">
+            <div class="collapse navbar-collapse d-flex" id="navbarSupportedContent">
+                <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Profesor/IndexProfesores")">Profesores</a></li>
                     <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Alumno/TodosAlumnos")">Alumnos</a></li>
                     <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Acceso/Logof")">Cerrar sesion</a></li>
@@ -27,16 +27,13 @@
                     {
                         if (Session["Administrador"] != null)
                         {
-                            <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Administrador/Index")"><i class="fas fa-user"></i> @Session["userTitulo"]</a></li>
-                        }
+        <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Administrador/Index")"><i class="fas fa-user"></i> @Session["userTitulo"]</a></li> }
                         if (Session["Profesor"] != null)
                         {
-                            <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Profesor/IndexProfesores")"><i class="fas fa-user"></i> @Session["userTitulo"]</a></li>
-                        }
+        <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Profesor/IndexProfesores")"><i class="fas fa-user"></i> @Session["userTitulo"]</a></li> }
                         if (Session["Alumno"] != null)
                         {
-                            <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Alumno/TodosAlumnos")"><i class="fas fa-user"></i> @Session["userTitulo"]</a></li>
-                        }
+        <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Alumno/TodosAlumnos")"><i class="fas fa-user"></i> @Session["userTitulo"]</a></li>}
                     }
                 </ul>
             </div>
@@ -47,9 +44,31 @@
     <div class="container body-content" style="margin-top: 90px;">
         @RenderBody()
 
-        <footer>
-            <hr />
-            <p>&copy; @DateTime.Now.Year - Escuela Emma Balaguer Vallejo</p>
+
+        <footer id="footer">
+            <div class="container" style="background: #093BA3;">
+
+                <div class="row">
+                    <div class="col-12 col-lg" style="text-align: center; padding-top: 15px; padding-bottom: 15px;">
+                        <a class="link" href="https://www.facebook.com/emma.balaguer.9" target="_blank"><i class="face fab fa-facebook"></i></a>
+                    </div>
+
+                    <div class="col-12 col-lg" style="text-align: center; padding-top: 15px; padding-bottom: 15px;">
+                        <a href="https://www.instagram.com/centroemmabalaguer/" target="_blank"><i class="ig fab fa-instagram"></i></a>
+                    </div>
+
+                    <div class="col-12 col-lg" style="text-align: center; padding-top: 15px; padding-bottom: 15px;">
+                        <a href="https://wa.me/18294215051" target="_blank"><i class="ws fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div id="copyright" style="color:white; text-align: center;">Copyright&copy; 2021 - Centro Emma Balaguer de Vallejo - Todos los derechos reservados</div>
+                    </div>
+                </div>
+
+            </div>
         </footer>
     </div>
 

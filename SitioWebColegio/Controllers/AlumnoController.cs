@@ -95,7 +95,7 @@ namespace SitioWebColegio.Controllers
             using (DBColegioEntities db = new DBColegioEntities())
             {
                 model.alumno.idRol = 3;
-                var oAlumno = model.alumno; 
+                var oAlumno = model.alumno;
 
                 db.Alumno.Add(oAlumno);
                 db.SaveChanges();
@@ -109,7 +109,7 @@ namespace SitioWebColegio.Controllers
 
             using (DBColegioEntities db = new DBColegioEntities())
             {
-               var alumnodb = db.Alumno.FirstOrDefault(d => d.idAlumno == Id);
+                var alumnodb = db.Alumno.FirstOrDefault(d => d.idAlumno == Id);
                 model.alumno = alumnodb;
             }
             return View(model);
@@ -151,7 +151,7 @@ namespace SitioWebColegio.Controllers
         public ActionResult AsignaturaAlumno()
         {
             ViewBag.mensajeEliminar = TempData["MensajeEliminarA"];
-                   
+
             return View();
         }
 
@@ -212,6 +212,8 @@ namespace SitioWebColegio.Controllers
                 model.AsignaturaFirst = AutoMapper.Mapper.Map<asignaturaViewModel>(db.Asignatura.FirstOrDefault(d => d.idAsignatura == Id));
                 model.profesorList = AutoMapper.Mapper.Map<List<profesorViewModel>>(db.Profesor.ToList());
                 model.alumnoList = db.Alumno.ToList();
+                model.profesorFirts = AutoMapper.Mapper.Map<profesorViewModel>(db.Profesor.FirstOrDefault(d => d.idProfesor == model.AsignaturaFirst.idProfesor));
+                model.alumno = db.Alumno.FirstOrDefault(d => d.idAlumno == model.AsignaturaFirst.idAlumno);
 
                 model.asignaturaList = AutoMapper.Mapper.Map<List<asignaturaViewModel>>(db.Asignatura.ToList());
             }
