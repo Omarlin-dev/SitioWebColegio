@@ -1,7 +1,5 @@
-﻿@{
-    ViewBag.Title = "Profesores";
-    Layout = "~/Views/Shared/LayoutProfesor.cshtml";
-}
+﻿@{ ViewBag.Title = "Profesores";
+    Layout = "~/Views/Shared/LayoutProfesor.cshtml"; }
 
 <h4 class="text-center">Profesores</h4>
 <style>
@@ -16,11 +14,40 @@
 
 @if (ViewBag.mensajeEliminar != null)
 {
-    <div class="alert alert-danger text-center" style="height: 65px;" role="alert">
-        <p>@ViewBag.mensajeEliminar</p>
-    </div>
-}
+<div class="alert alert-danger text-center" style="height: 65px;" role="alert">
+    <p>@ViewBag.mensajeEliminar</p>
+</div>}
 
+<script src="~/js/JsExcel.js"></script>
+
+<script>
+    function fnExcelReport(id, name) {
+        var tab_text = '<html xmlns: x="urn:schemas-microsoft-com:office:excel">';
+        tab_text = tab_text + '<head><xml><x: ExcelWorkbook><x: ExcelWorksheets><x: ExcelWorksheet>';
+        tab_text = tab_text + '<x: Name>Test Sheet</x: Name>';
+        tab_text = tab_text + '<x: WorksheetOptions><x: Panes></x: Panes></x: WorksheetOptions ></x: ExcelWorksheet > ';
+        tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+        tab_text = tab_text + "<table border='1px' style='color:black'>";
+
+
+        var exportTable = $('#' + id).clone();
+        exportTable.find('th').last().remove();
+        exportTable.find('input').each(function (index, elem) { $(elem).remove(); });
+        exportTable.find('a').each(function (index, elem) { $(elem).remove(); });
+
+        tab_text = tab_text + exportTable.html();
+        tab_text = tab_text + '</table></body></html>';
+        var fileName = "Profesores" + '.xls';
+
+        //Save the file
+        var blob = new Blob([tab_text], { type: "application/vnd.ms-excel;charset=utf-8" })
+        window.saveAs(blob, fileName);
+    }
+</script>
+
+@if (!(Session["Administrador"] == null && Session["Profesor"] == null))
+{
+<button class="btn btn-primary" onclick="javascript: fnExcelReport('datatable', 'data')">Exportar a Excel</button>}
 <div>
     <table class="table table-bordered table-hover w-100" id="datatable">
         <thead>
@@ -29,7 +56,7 @@
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Especialidad</th>
-
+                <th>Acciones</th>
             </tr>
         </thead>
     </table>
@@ -54,16 +81,21 @@
                     { "data": "idProfesor" },
                     { "data": "nombre" },
                     { "data": "apellido" },
-                    { "data": "especialidad" }
+                    { "data": "especialidad" },
+                     {
+                        "data": "idProfesor", "render": function (data) {
+                            return "<a class='btn btn-primary' href='@Url.Content("~/Profesor/DetalleProfesor?Id=")" + data + "')><i class='fas fa-eye'></i>Ver Mas</a>";
+                         },
 
+                     }
                 ],
                 "language": {
 
-                    "emptyTable" : "No tiene Datos, porfavor presecione click en <b>Nuevo</b> Button"
+                    "emptyTable": "No tiene Datos, porfavor presecione click en <b>Nuevo</b> Button"
                 }
             });
         });
 
-   
+
     </script>
 }
