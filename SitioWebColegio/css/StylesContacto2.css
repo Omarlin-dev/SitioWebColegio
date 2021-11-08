@@ -1,0 +1,132 @@
+﻿/*header{
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+}*/
+
+/**{
+  padding: 0;
+  margin: 0;
+}*/
+
+body{
+    margin-top: 65px;
+}
+
+button {
+    width: 100%;
+    background: rgb(30, 30, 30);
+    border: 1px solid rgb(30, 030, 030);
+    color: red;
+}
+
+#vinculo {
+    text-decoration: none;
+    color: black;
+}
+
+
+    .face:hover {
+        color: rgba(255, 255, 255, 0.7);
+        transition: 0.3s;
+    }
+
+    .face:not(:hover) {
+        color: white;
+        transition: 0.3s;
+    }
+
+
+    
+    .ig:not(:hover) {
+        color: white;
+        transition: 0.3s;
+    }
+
+.ws {
+    color: white;
+}
+
+    .ws:hover {
+        color: rgba(255, 255, 255, 0.7);
+        transition: .3s;
+    }
+
+    .ws:not(:hover) {
+        color: white;
+        transition: .3s;
+    }
+
+#titulo {
+    color: white;
+}
+
+#nav {
+    background: #0d6efd !important;
+    /*background: linear-gradient(to left, #3cbc0f, #278d01);*/
+}
+
+#cont {
+    text-decoration: none;
+    color: rgb(250, 249, 246);
+    text-align: center;
+    padding-bottom: 4px;
+    padding-top: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+#cont:hover {
+    /*color: #107CEE;*/
+    background: #1095EE;
+    border-radius: 7px;
+    transition: 0.5s;
+}
+
+#cont:active {
+    background: #10B1FF;
+    transition: 0.5s;
+}
+
+#cont:not(:hover) {
+    transition: 0.5s;
+}
+
+.col {
+    border: 1px solid black;
+}
+
+.link {
+    width: 200px;
+    height: 200px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#submit {
+    color: white !important;
+    background: #0d6efd;
+    border: 1px solid #0d6efd;
+}
+
+    #submit:hover {
+        background: #1095EE;
+        transition: .3s;
+        /*align-content: center#BABABAFF;*/
+    }
+
+    #submit:active {
+        background: #2694D8;
+    }
+
+/*button:hover{
+  color: white;
+}*/

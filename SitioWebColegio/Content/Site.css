@@ -1,19 +1,30 @@
-﻿*{
-    margin: 5px;
+﻿* {
+    margin: 2px;
 }
 
-body{
+body {
     margin: 20px;
 }
 
-
-footer{
-   margin-top: 30px;
+.fab {
+    font-size: 25px;
+    color: white;
 }
 
-.navselection{
+.ig:hover {
+    color: rgba(255, 255, 255, 0.7);
+    transition: 0.3s;
+}
+
+.collapse {
+    justify-content: end;
+    margin-right: 20px;
+}
+
+footer {
+    margin-top: 30px;
+}
+
+.navselection {
     height: 60px;
-    
 }
-
-
