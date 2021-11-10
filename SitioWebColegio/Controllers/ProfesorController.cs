@@ -50,8 +50,10 @@ namespace SitioWebColegio.Controllers
 
                 profesor = AutoMapper.Mapper.Map<profesorViewModel>(profesordb);
 
-                profesor.asiginaturas = db.Asignatura.Where(d => d.idProfesor == Id).ToList();
 
+                profesor.asiginaturas = db.Asignatura.Where(d => d.idProfesor == profesor.idProfesor).ToList();
+
+                profesor.nombreAsignatura = profesor.asiginaturas.Select(d => d.nombre).Distinct().ToList();
             }
             return View(profesor);
         }

@@ -12,5 +12,6 @@ namespace SitioWebColegio.Models.viewModels
         public string apellido { get; set; }
         public string telefono { get; set; }
         public string nombreUsuario { get; set; }
+
     }
 }

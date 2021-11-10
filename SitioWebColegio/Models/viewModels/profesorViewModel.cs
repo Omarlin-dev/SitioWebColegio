@@ -8,6 +8,11 @@ namespace SitioWebColegio.Models.viewModels
 {
     public class profesorViewModel 
     {
+        public profesorViewModel()
+        {
+            nombreAsignatura = new List<string>();
+        }
+
         public int idProfesor { get; set; }
         [Required]
         public string nombre { get; set; }
@@ -18,10 +23,10 @@ namespace SitioWebColegio.Models.viewModels
         public string clave { get; set; }
         [Required]
         public string especialidad { get; set; }
-        public Nullable<bool> estado { get; set; }
         public Nullable<int> idRol { get; set; }
 
-       // public virtual Asignatura AsignaturaModel { get; set; }
+        // public virtual Asignatura AsignaturaModel { get; set; }
         public List<Asignatura> asiginaturas { get; set; }
+        public List<string> nombreAsignatura { get; set; } 
     }
 }

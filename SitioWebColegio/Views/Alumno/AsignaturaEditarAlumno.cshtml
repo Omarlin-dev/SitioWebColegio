@@ -19,26 +19,25 @@
         <div class="form-control">
             <label>Asignatura</label>
             <select name="AsignaturaFirst.nombre" class="form-control">
-                <option value="">Seleccione</option>
+                <option value="@Model.AsignaturaFirst.nombre">@Model.AsignaturaFirst.nombre</option>
 
                 @foreach (var omodel in Model.asignaturaList)
                 {
-                    <option value="@omodel.nombre">@omodel.nombre</option>
+                <option value="@omodel.nombre">@omodel.nombre</option>
                 }
             </select>
             @Html.ValidationMessageFor(d => d.AsignaturaFirst.nombre, "", new { @class = "text-danger" })
         </div>
 
-       
+
         <div class="form-control">
             <label>Profesor</label>
             <select name="AsignaturaFirst.idProfesor" class="form-control">
-                <option value="">Seleccione</option>
+                <option value="@Model.profesorFirts.idProfesor">@Model.profesorFirts.nombre</option>
 
                 @foreach (var omodel in Model.profesorList)
                 {
-                    <option value="@omodel.idProfesor">@omodel.nombre</option>
-                }
+    <option value="@omodel.idProfesor">@omodel.nombre</option>}
             </select>
             @Html.ValidationMessageFor(d => d.AsignaturaFirst.idProfesor, "", new { @class = "text-danger" })
 
@@ -47,12 +46,11 @@
         <div class="form-control">
             <label>Alumno</label>
             <select name="AsignaturaFirst.idAlumno" class="form-control">
-                <option value="">Seleccione</option>
+                <option value="@Model.alumno.idAlumno">@Model.alumno.nombre</option>
 
                 @foreach (var omodel in Model.alumnoList)
                 {
-                    <option value="@omodel.idAlumno">@omodel.nombre</option>
-                }
+    <option value="@omodel.idAlumno">@omodel.nombre</option>}
             </select>
             @Html.ValidationMessageFor(d => d.AsignaturaFirst.idAlumno, "", new { @class = "text-danger" })
 

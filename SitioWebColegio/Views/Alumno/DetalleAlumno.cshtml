@@ -47,10 +47,10 @@ else
 
     <div class="form-group">
         <label>Asignaturas: </label><br />
-        @foreach (var omodel in Model.asignaturas)
+        @foreach (var omodel in Model.nombreAsignatura)
         {
             <ul style="margin-left: 30px;">
-                <li>  @omodel.nombre </li>
+                <li>  @omodel </li>
             </ul>
         }
     </div>

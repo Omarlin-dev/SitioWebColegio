@@ -44,7 +44,7 @@ namespace SitioWebColegio.Controllers
         [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 9, idOperacionAlumno: 14)]
         public ActionResult DetalleAlumno(int Id)
         {
-            var oAlumno = new alumnoViewModel();
+                       var oAlumno = new alumnoViewModel();
 
             using (DBColegioEntities db = new DBColegioEntities())
             {
@@ -52,7 +52,10 @@ namespace SitioWebColegio.Controllers
 
                 oAlumno.alumno = Alumnodb;
 
-                oAlumno.asignaturas = db.Asignatura.Where(d => d.idAlumno == Id).ToList();
+                oAlumno.asignaturas =  db.Asignatura.Where(d => d.idAlumno == Id).Distinct().ToList();
+
+                oAlumno.nombreAsignatura = oAlumno.asignaturas.Select(d => d.nombre).Distinct().ToList();
+
             }
 
             return View(oAlumno);
