@@ -1,4 +1,4 @@
-﻿@model SitioWebColegio.Models.viewModels.alumnoViewModel
+﻿@model SitioWebColegio.Models.Alumno
 @{
     ViewBag.Title = "NuevoAlumno";
     Layout = "~/Views/Shared/LayoutAdministrador.cshtml";
@@ -18,30 +18,30 @@
     <form action="@Url.Content("~/Alumno/NuevoAlumno")" method="post" class="form-control">
         <div class="form-control">
             <label for="nombre">Nombre</label>
-            @Html.TextBoxFor(d => d.alumno.nombre, "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(d => d.alumno.nombre, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(d => d.nombre, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.nombre, "", new { @class = "text-danger" })
 
         </div>
         <div class="form-control">
             <label for="apellido">Apellido</label>
-            @Html.TextBoxFor(d => d.alumno.apellido, "", new { @class = "form-control" })
+            @Html.TextBoxFor(d => d.apellido, "", new { @class = "form-control" })
         </div>
         <div class="form-control">
             <label for="nombreusuario">Nombre de Usuario</label>
-            @Html.TextBoxFor(d => d.alumno.nombreUsuario, "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(d => d.alumno.nombreUsuario, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(d => d.nombreUsuario, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.nombreUsuario, "", new { @class = "text-danger" })
 
         </div>
         <div class="form-control">
             <label for="clave">Clave</label>
-            <input type="password" name="alumno.clave" class="form-control" />
-            @Html.ValidationMessageFor(d => d.alumno.clave, "", new { @class = "text-danger" })
+            <input type="password" name="clave" class="form-control" />
+            @Html.ValidationMessageFor(d => d.clave, "", new { @class = "text-danger" })
 
         </div>
         <div class="form-control">
             <label for="especialidad">Telefono</label>
-            @Html.TextBoxFor(d => d.alumno.telefono, "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(d => d.alumno.telefono, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(d => d.telefono, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(d => d.telefono, "", new { @class = "text-danger" })
 
         </div>
 

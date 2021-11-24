@@ -67,7 +67,7 @@ namespace SitioWebColegio.Filtro
 
                     if (miOperacionProfesor.ToList().Count() < 1 )
                     {
-                        filterContext.Result = new RedirectResult("~/Error/NoAutorizado");
+                       filterContext.Result = new RedirectResult("~/Error/NoAutorizado");
                     }
                 }
 
@@ -86,14 +86,14 @@ namespace SitioWebColegio.Filtro
                  }
                 if (miOperacionAlumno == null && miOperacionProfesor == null && miOperacionAdmin == null)
                 {
-                    filterContext.Result = new RedirectResult("~/Error/NoAutorizado");
+                   filterContext.Result = new RedirectResult("~/Error/NoAutorizado");
 
                 }
 
             }
             catch (Exception)
             {
-                filterContext.Result = new RedirectResult("~/Error/NoAutorizado");
+              filterContext.Result = new RedirectResult("~/Error/NoAutorizado");
             }
         }
     }

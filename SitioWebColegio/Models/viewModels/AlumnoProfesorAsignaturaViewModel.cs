@@ -8,16 +8,19 @@ namespace SitioWebColegio.Models.viewModels
 {
     public class AlumnoProfesorAsignaturaViewModel 
     {
-        public List<profesorViewModel> profesorList { get; set; }
-        public profesorViewModel profesorFirts { get; set; }
+        public AlumnoProfesorAsignaturaViewModel()
+        {
+            nombreAsignatura = new List<string>();
+        }
 
-        public List<Alumno> alumnoList { get; set; }
-        public List<Alumno> alumnoListdb { get; set; }
+        public List<Profesor> profesorList { get; set; }
+        public Profesor profesorFirts { get; set; }
+               
+        public List<Asignatura> asignaturaList { get; set; }
 
-        public List<asignaturaViewModel> asignaturaList { get; set; }
+        public Asignatura AsignaturaFirst { get; set; }
 
-        public asignaturaViewModel AsignaturaFirst { get; set; }
-        public virtual Alumno alumno { get; set; }
+        public List<string> nombreAsignatura { get; set; }
 
     }
 }

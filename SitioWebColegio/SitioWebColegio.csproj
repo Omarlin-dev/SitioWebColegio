@@ -132,6 +132,11 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfesorController.cs" />
+    <Compile Include="Datos\administradorDatos.cs" />
+    <Compile Include="Datos\alumnoAsignaturaDatos.cs" />
+    <Compile Include="Datos\alumnosDatos.cs" />
+    <Compile Include="Datos\asignaturasDatos.cs" />
+    <Compile Include="Datos\profesorDatos.cs" />
     <Compile Include="Filtro\Autorizados.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -143,6 +148,9 @@
       <DependentUpon>db.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Asignatura.cs">
+      <DependentUpon>db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AsignaturaAlumno.cs">
       <DependentUpon>db.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\db.Context.cs">
@@ -171,8 +179,10 @@
     </Compile>
     <Compile Include="Models\viewModels\administradorViewModel.cs" />
     <Compile Include="Models\viewModels\AlumnoProfesorAsignaturaViewModel.cs" />
+    <Compile Include="Models\viewModels\alumnosAsignaturaViewModel.cs" />
     <Compile Include="Models\viewModels\AlumnosViewModels.cs" />
     <Compile Include="Models\viewModels\alumnoViewModel.cs" />
+    <Compile Include="Models\viewModels\asignaturaAlumnoViewModel.cs" />
     <Compile Include="Models\viewModels\asignaturaViewModel.cs" />
     <Compile Include="Models\viewModels\LoginViewModel.cs" />
     <Compile Include="Models\viewModels\profesorViewModel.cs" />
@@ -352,7 +362,6 @@
     <Content Include="Views\Profesor\Asignatura.cshtml" />
     <Content Include="Views\Profesor\AsignaturaNuevo.cshtml" />
     <Content Include="Views\Profesor\AsignaturaEditar.cshtml" />
-    <Content Include="Views\Profesor\AsignaturaEliminar.cshtml" />
     <Content Include="Views\Alumno\TodosAlumnos.cshtml" />
     <Content Include="Views\Alumno\DetalleAlumno.cshtml" />
     <Content Include="Views\Alumno\TodosAlumnosAdmin.cshtml" />
@@ -361,8 +370,6 @@
     <Content Include="Views\Alumno\AsignaturaAlumno.cshtml" />
     <Content Include="Views\Alumno\AsignaturaNuevoAlumno.cshtml" />
     <Content Include="Views\Alumno\AsignaturaEditarAlumno.cshtml" />
-    <Content Include="Views\Alumno\CompanerosClase.cshtml" />
-    <Content Include="Views\Alumno\CompanerosAlumnoClase.cshtml" />
     <Content Include="Views\Acceso\Login.cshtml" />
     <Content Include="Views\Shared\LayoutLogin.cshtml" />
     <Content Include="Views\Error\NoAutorizado.cshtml" />

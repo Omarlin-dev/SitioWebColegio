@@ -1,6 +1,4 @@
-﻿@model List<SitioWebColegio.Models.viewModels.asignaturaViewModel>
-
-@{
+﻿@{
     ViewBag.Title = "Asignatura Alumno";
     Layout = "~/Views/Shared/LayoutAdministrador.cshtml";
 }
@@ -37,9 +35,8 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Nombre</th>
                 <th>Id Alumno</th>
-                <th>Id Profesor</th>
+                <th>Id Asignatura</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -62,13 +59,11 @@
                     "datatype": "json"
                 },
                 "columns": [
-                    { "data": "idAsignatura" },
-                    { "data": "nombre" },
+                    { "data": "Id" },
                     { "data": "idAlumno" },
-                    { "data": "idProfesor" },
-
+                    { "data": "idAsignatura" },
                     {
-                        "data": "idAsignatura", "render": function (data) {
+                        "data": "Id", "render": function (data) {
                             return "<a class='btn btn-warning' href='@Url.Content("~/Alumno/AsignaturaEditarAlumno?Id=")" + data + "')><i class='fa fa-pencil'></i> Editar</a><a class='btn btn-danger' style='margin-left:5px' onclick='return jsEliminar();' href='@Url.Content("~/Alumno/AsignaturaEliminarAlumno?Id=")" + data + "')><i class='fa fa-trash'></i> Eliminar</a>";
                         },
 

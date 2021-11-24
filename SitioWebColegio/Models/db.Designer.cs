@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\Omarlin\Documents\2021-3\Proyecto Final\SitioWebColegio\SitioWebColegio\Models\db.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'C:\Users\Omarlin\Desktop\Proyecto final de la carrera\SitioWebColegio\Models\db.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

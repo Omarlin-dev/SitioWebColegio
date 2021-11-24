@@ -41,7 +41,6 @@
                 <th>#</th>
                 <th>Nombre</th>
                 <th>Id Profesor</th>
-                <th>Id Alumno</th>
                 <th>Acciones</th>
 
             </tr>
@@ -68,8 +67,6 @@
                     { "data": "idAsignatura" },
                     { "data": "nombre" },
                     { "data": "idProfesor" },
-                    { "data": "idAlumno" },
-
                     {
                         "data": "idAsignatura", "render": function (data) {
                             return "<a class='btn btn-warning' href='@Url.Content("~/Profesor/AsignaturaEditar?Id=")" + data + "')><i class='fa fa-pencil'></i> Editar</a><a class='btn btn-danger' style='margin-left:5px' onclick='return jsEliminar();' href='@Url.Content("~/Profesor/AsignaturaEliminar?Id=")" + data + "')><i class='fa fa-trash'></i> Eliminar</a>";

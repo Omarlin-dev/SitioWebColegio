@@ -1,4 +1,5 @@
 ﻿using Microsoft.Ajax.Utilities;
+using SitioWebColegio.Datos;
 using SitioWebColegio.Filtro;
 using SitioWebColegio.Models;
 using SitioWebColegio.Models.viewModels;
@@ -12,6 +13,9 @@ namespace SitioWebColegio.Controllers
 {
     public class AlumnoController : Controller
     {
+        private alumnosDatos datos = new alumnosDatos();
+        private alumnoAsignaturaDatos datosAsignatura = new alumnoAsignaturaDatos();
+
         // GET: Alumno
         [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 8, idOperacionAlumno: 13)]
         public ActionResult TodosAlumnos()
@@ -20,46 +24,13 @@ namespace SitioWebColegio.Controllers
 
         }
 
-        public ActionResult GetDataAlumnosTodos()
-        {
-
-            List<AlumnosViewModels> lst = new List<AlumnosViewModels>();
-            using (var db = new DBColegioEntities())
-            {
-                lst = (from d in db.Alumno
-                       select new AlumnosViewModels
-                       {
-                           idAlumno = d.idAlumno,
-                           nombre = d.nombre,
-                           apellido = d.apellido,
-                           telefono = d.telefono
-                       }).ToList();
-
-            }
-
-            return Json(new { data = lst }, JsonRequestBehavior.AllowGet);
-
-        }
-
         [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 9, idOperacionAlumno: 14)]
         public ActionResult DetalleAlumno(int Id)
         {
-                       var oAlumno = new alumnoViewModel();
-
-            using (DBColegioEntities db = new DBColegioEntities())
-            {
-                var Alumnodb = db.Alumno.FirstOrDefault(d => d.idAlumno == Id);
-
-                oAlumno.alumno = Alumnodb;
-
-                oAlumno.asignaturas =  db.Asignatura.Where(d => d.idAlumno == Id).Distinct().ToList();
-
-                oAlumno.nombreAsignatura = oAlumno.asignaturas.Select(d => d.nombre).Distinct().ToList();
-
-            }
-
-            return View(oAlumno);
+            var lst = datos.ConsultarAlumno(Id);
+            return View(lst);
         }
+
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult TodosAlumnosAdmin()
         {
@@ -71,14 +42,7 @@ namespace SitioWebColegio.Controllers
         public ActionResult GetDataAlumnos()
         {
 
-            List<AlumnosViewModels> lst = new List<AlumnosViewModels>();
-            using (var db = new DBColegioEntities())
-            {
-                lst = AutoMapper.Mapper.Map<List<AlumnosViewModels>>(db.Alumno.ToList());
-
-            }
-
-            return Json(new { data = lst }, JsonRequestBehavior.AllowGet);
+            return Json(new { data = datos.GetDataAlumnnos() }, JsonRequestBehavior.AllowGet);
 
         }
 
@@ -89,67 +53,46 @@ namespace SitioWebColegio.Controllers
         }
         [Autorizados(idOperacionadmin: 1)]
         [HttpPost]
-        public ActionResult NuevoAlumno(alumnoViewModel model)
+        public ActionResult NuevoAlumno(Alumno modelo)
         {
 
             if (!ModelState.IsValid)
-                return View(model);
+                return View(modelo);
 
-            using (DBColegioEntities db = new DBColegioEntities())
-            {
-                model.alumno.idRol = 3;
-                var oAlumno = model.alumno;
-
-                db.Alumno.Add(oAlumno);
-                db.SaveChanges();
-            }
+            datos.Guardar(modelo);
             return Redirect("TodosAlumnosAdmin");
         }
+
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult EditarAlumno(int Id)
-        {
-            alumnoViewModel model = new alumnoViewModel();
-
-            using (DBColegioEntities db = new DBColegioEntities())
-            {
-                var alumnodb = db.Alumno.FirstOrDefault(d => d.idAlumno == Id);
-                model.alumno = alumnodb;
-            }
-            return View(model);
+        { 
+            var lst = datos.ConsultarOneAlumno(Id);
+            return View(lst); 
         }
+
         [Autorizados(idOperacionadmin: 1)]
         [HttpPost]
-        public ActionResult EditarAlumno(alumnoViewModel model)
+        public ActionResult EditarAlumno(Alumno modelo)
         {
 
             if (!ModelState.IsValid)
-                return View(model);
+                return View(modelo);
 
-            using (DBColegioEntities db = new DBColegioEntities())
-            {
-                model.alumno.idRol = 3;
-                var alumnodb = model.alumno;
+            datos.Editar(modelo);
 
-                db.Entry(alumnodb).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-            }
             return Redirect("TodosAlumnosAdmin");
 
         }
+
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult EliminarAlumno(int Id)
         {
-            using (DBColegioEntities db = new DBColegioEntities())
-            {
-                var alumnodb = db.Alumno.FirstOrDefault(d => d.idAlumno == Id);
-                TempData["MensajeEliminarP"] = "Alumno/a: " + alumnodb.nombre + " Eliminado con exito";
+                datos.Eliminar(Id);
+                TempData["MensajeEliminarP"] = "Alumno Eliminado con exito";                         
 
-                db.Alumno.Remove(alumnodb);
-                db.SaveChanges();
-
-            }
             return Redirect("TodosAlumnosAdmin");
         }
+
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult AsignaturaAlumno()
         {
@@ -160,11 +103,7 @@ namespace SitioWebColegio.Controllers
 
         public ActionResult GetDataAlumnosAsignaturas()
         {
-            var lst = new List<asignaturaViewModel>();
-            using (DBColegioEntities db = new DBColegioEntities())
-            {
-                lst = AutoMapper.Mapper.Map<List<asignaturaViewModel>>(db.Asignatura.ToList());
-            }
+            var lst = datosAsignatura.GetAsignaturas();
 
             return Json(new { data = lst }, JsonRequestBehavior.AllowGet);
         }
@@ -172,74 +111,53 @@ namespace SitioWebColegio.Controllers
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult AsignaturaNuevoAlumno()
         {
-            var model = new AlumnoProfesorAsignaturaViewModel();
+            var modelo = datosAsignatura.consultarGuardarAsignatura();
 
-
-            using (DBColegioEntities db = new DBColegioEntities())
-            {
-                model.profesorList = AutoMapper.Mapper.Map<List<profesorViewModel>>(db.Profesor.ToList());
-                model.alumnoList = db.Alumno.ToList();
-
-                model.asignaturaList = AutoMapper.Mapper.Map<List<asignaturaViewModel>>(db.Asignatura.ToList());
-            }
-
-            return View(model);
+            return View(modelo);
         }
+
         [Autorizados(idOperacionadmin: 1)]
         [HttpPost]
-        public ActionResult AsignaturaNuevoAlumno(AlumnoProfesorAsignaturaViewModel omodel)
+        public ActionResult AsignaturaNuevoAlumno(asignaturaAlumnoViewModel modelo)
         {
             if (!ModelState.IsValid)
-                return View(omodel);
+                return View(modelo);
 
-            using (DBColegioEntities db = new DBColegioEntities())
-            {
-                var asignaturadb = AutoMapper.Mapper.Map<Asignatura>(omodel.AsignaturaFirst);
-
-
-                db.Asignatura.Add(asignaturadb);
-
-                db.SaveChanges();
-            }
+            datosAsignatura.GuardarAsignatura(modelo);
 
             return Redirect("AsignaturaAlumno");
-
         }
+
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult AsignaturaEditarAlumno(int Id)
         {
-            var model = new AlumnoProfesorAsignaturaViewModel();
+            var modelo = new asignaturaAlumnoViewModel();
 
             using (DBColegioEntities db = new DBColegioEntities())
             {
-                model.AsignaturaFirst = AutoMapper.Mapper.Map<asignaturaViewModel>(db.Asignatura.FirstOrDefault(d => d.idAsignatura == Id));
-                model.profesorList = AutoMapper.Mapper.Map<List<profesorViewModel>>(db.Profesor.ToList());
-                model.alumnoList = db.Alumno.ToList();
-                model.profesorFirts = AutoMapper.Mapper.Map<profesorViewModel>(db.Profesor.FirstOrDefault(d => d.idProfesor == model.AsignaturaFirst.idProfesor));
-                model.alumno = db.Alumno.FirstOrDefault(d => d.idAlumno == model.AsignaturaFirst.idAlumno);
+                modelo.oneAsignaturasAlumnos = db.AsignaturaAlumno.FirstOrDefault(d => d.Id == Id);
+                modelo.oneAsignaturas = AutoMapper.Mapper.Map<asignaturaViewModel>(db.Asignatura.FirstOrDefault(d => d.idAsignatura == modelo.oneAsignaturasAlumnos.idAsignatura));
+                modelo.oneAlumnos = AutoMapper.Mapper.Map<AlumnosViewModels>(db.Alumno.FirstOrDefault(d => d.idAlumno == modelo.oneAsignaturasAlumnos.idAlumno));
 
-                model.asignaturaList = AutoMapper.Mapper.Map<List<asignaturaViewModel>>(db.Asignatura.ToList());
+
+                modelo.alumnos = AutoMapper.Mapper.Map<List<AlumnosViewModels>>(db.Alumno.ToList());
+                modelo.asignaturas = AutoMapper.Mapper.Map<List<asignaturaViewModel>>(db.Asignatura.ToList());
+
+
             }
 
-            return View(model);
+            return View(modelo);
         }
+
         [Autorizados(idOperacionadmin: 1)]
         [HttpPost]
-        public ActionResult AsignaturaEditarAlumno(AlumnoProfesorAsignaturaViewModel omodel)
+        public ActionResult AsignaturaEditarAlumno(asignaturaAlumnoViewModel modelo)
         {
 
             if (!ModelState.IsValid)
-                return View(omodel);
+                return View(modelo);
 
-            using (DBColegioEntities db = new DBColegioEntities())
-            {
-                var asignaturadb = AutoMapper.Mapper.Map<Asignatura>(omodel.AsignaturaFirst);
-
-
-                db.Entry(asignaturadb).State = System.Data.Entity.EntityState.Modified;
-
-                db.SaveChanges();
-            }
+            datosAsignatura.EditarAsignatura(modelo);
 
             return Redirect("AsignaturaAlumno");
 
@@ -247,16 +165,10 @@ namespace SitioWebColegio.Controllers
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult AsignaturaEliminarAlumno(int Id)
         {
-            using (DBColegioEntities db = new DBColegioEntities())
-            {
-                var oAsignatura = db.Asignatura.FirstOrDefault(d => d.idAsignatura == Id);
+            datosAsignatura.EliminarAsignatura(Id);
 
-                TempData["MensajeEliminarA"] = "Asignatura: " + oAsignatura.nombre + " Eliminada con exito";
-
-                db.Asignatura.Remove(oAsignatura);
-                db.SaveChanges();
-
-            }
+            TempData["MensajeEliminarA"] = "Asignatura Eliminada con exito";
+                       
             return Redirect("AsignaturaAlumno");
         }
     }

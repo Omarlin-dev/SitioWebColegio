@@ -11,30 +11,26 @@ namespace SitioWebColegio.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Alumno
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Alumno()
         {
-            this.Asignatura = new HashSet<Asignatura>();
+            this.AsignaturaAlumno = new HashSet<AsignaturaAlumno>();
         }
     
         public int idAlumno { get; set; }
-        [Required]
         public string nombre { get; set; }
         public string apellido { get; set; }
-        [Required]
         public string telefono { get; set; }
-        [Required]
         public string nombreUsuario { get; set; }
-        [Required]
         public string clave { get; set; }
         public Nullable<bool> estado { get; set; }
         public Nullable<int> idRol { get; set; }
+    
         public virtual Rol_Operacion Rol_Operacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Asignatura> Asignatura { get; set; }
+        public virtual ICollection<AsignaturaAlumno> AsignaturaAlumno { get; set; }
     }
 }

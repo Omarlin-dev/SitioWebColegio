@@ -1,4 +1,4 @@
-﻿@model SitioWebColegio.Models.viewModels.AlumnoProfesorAsignaturaViewModel
+﻿@model SitioWebColegio.Models.viewModels.asignaturaAlumnoViewModel 
 @{
     ViewBag.Title = "AsignaturaNuevoAlumno";
     Layout = "~/Views/Shared/LayoutAdministrador.cshtml";
@@ -10,47 +10,35 @@
     <a style="float: right; color: blue" href="@Url.Content("~/Alumno/AsignaturaAlumno")"><i class="fas fa-arrow-alt-circle-left"></i></a>
 </h2>
 
-<div class="text-center justify-content-center h-50" style="max-width: 50%;">
+<div class="text-center justify-content-center m-auto" style="max-width: 50%;">
     <h4>Nueva Asignatura Alumno</h4>
 
     <form action="@Url.Content("~/Alumno/AsignaturaNuevoAlumno")" method="post" class="form-control">
 
         <div class="form-control">
-            <label>Asignatura</label>
-            <select name="AsignaturaFirst.nombre" class="form-control">
-                <option value="">Seleccione</option>
-
-                @foreach (var omodel in Model.asignaturaList)
-                {
-                    <option value="@omodel.nombre">@omodel.nombre</option>
-                }
-            </select>
-        </div>
-
-        <div class="form-control">
-            <label>Profesor</label>
-            <select name="AsignaturaFirst.idProfesor" class="form-control">
-                <option value="">Seleccione</option>
-
-                @foreach (var omodel in Model.profesorList)
-                {
-                    <option value="@omodel.idProfesor">@omodel.nombre</option>
-                }
-            </select>
-        </div>
-
-        <div class="form-control">
             <label>Alumno</label>
-            <select name="AsignaturaFirst.idAlumno" class="form-control">
+            <select name="alumnoAsignaturaGuardar.idAlumno" class="form-control">
                 <option value="">Seleccione</option>
-
-                @foreach (var omodel in Model.alumnoList)
+                @foreach (var omodel in Model.alumnos)
                 {
                     <option value="@omodel.idAlumno">@omodel.nombre</option>
                 }
             </select>
-        </div>
+            @Html.ValidationMessageFor(d => d.alumnoAsignaturaGuardar.idAlumno, "", new { @class = "text-danger" })
 
+        </div>
+        <div class="form-control">
+            <label>Asignatura</label>
+            <select name="alumnoAsignaturaGuardar.idAsignatura" class="form-control">
+                <option value="">Seleccione</option>
+                @foreach (var omodel in Model.asignaturas)
+                {
+                    <option value="@omodel.idAsignatura">@omodel.nombre</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(d => d.alumnoAsignaturaGuardar.idAsignatura, "", new { @class = "text-danger" })
+
+        </div>
 
         <div class="text-end float-end">
             <input type="submit" value="Enviar" class="btn btn-success" />

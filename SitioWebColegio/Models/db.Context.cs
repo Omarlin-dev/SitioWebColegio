@@ -29,7 +29,8 @@ namespace SitioWebColegio.Models
         public virtual DbSet<Rol_Operacion> Rol_Operacion { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Administrador> Administrador { get; set; }
-        public virtual DbSet<Asignatura> Asignatura { get; set; }
         public virtual DbSet<Alumno> Alumno { get; set; }
+        public virtual DbSet<AsignaturaAlumno> AsignaturaAlumno { get; set; }
+        public virtual DbSet<Asignatura> Asignatura { get; set; }
     }
 }

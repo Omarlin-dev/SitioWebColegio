@@ -34,9 +34,16 @@
             <PropertyRef Name="idAsignatura" />
           </Key>
           <Property Name="idAsignatura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="idProfesor" Type="int" />
-          <Property Name="idAlumno" Type="int" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AsignaturaAlumno">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idAlumno" Type="int" Nullable="false" />
+          <Property Name="idAsignatura" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Profesor">
           <Key>
@@ -93,19 +100,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Asignatura_Alumno">
-          <End Role="Alumno" Type="Self.Alumno" Multiplicity="0..1" />
-          <End Role="Asignatura" Type="Self.Asignatura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Alumno">
-              <PropertyRef Name="idAlumno" />
-            </Principal>
-            <Dependent Role="Asignatura">
-              <PropertyRef Name="idAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Asignatura_Profesor">
+        <Association Name="FK_Asignatura_Profesor1">
           <End Role="Profesor" Type="Self.Profesor" Multiplicity="0..1" />
           <End Role="Asignatura" Type="Self.Asignatura" Multiplicity="*" />
           <ReferentialConstraint>
@@ -114,6 +109,30 @@
             </Principal>
             <Dependent Role="Asignatura">
               <PropertyRef Name="idProfesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AsignaturaAlumno_Alumno">
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="1" />
+          <End Role="AsignaturaAlumno" Type="Self.AsignaturaAlumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="idAlumno" />
+            </Principal>
+            <Dependent Role="AsignaturaAlumno">
+              <PropertyRef Name="idAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AsignaturaAlumno_Asignatura">
+          <End Role="Asignatura" Type="Self.Asignatura" Multiplicity="1" />
+          <End Role="AsignaturaAlumno" Type="Self.AsignaturaAlumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asignatura">
+              <PropertyRef Name="idAsignatura" />
+            </Principal>
+            <Dependent Role="AsignaturaAlumno">
+              <PropertyRef Name="idAsignatura" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -133,6 +152,7 @@
           <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Asignatura" EntityType="Self.Asignatura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AsignaturaAlumno" EntityType="Self.AsignaturaAlumno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profesor" EntityType="Self.Profesor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol_Operacion" EntityType="Self.Rol_Operacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -144,13 +164,17 @@
             <End Role="Rol_Operacion" EntitySet="Rol_Operacion" />
             <End Role="Alumno" EntitySet="Alumno" />
           </AssociationSet>
-          <AssociationSet Name="FK_Asignatura_Alumno" Association="Self.FK_Asignatura_Alumno">
-            <End Role="Alumno" EntitySet="Alumno" />
-            <End Role="Asignatura" EntitySet="Asignatura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Asignatura_Profesor" Association="Self.FK_Asignatura_Profesor">
+          <AssociationSet Name="FK_Asignatura_Profesor1" Association="Self.FK_Asignatura_Profesor1">
             <End Role="Profesor" EntitySet="Profesor" />
             <End Role="Asignatura" EntitySet="Asignatura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AsignaturaAlumno_Alumno" Association="Self.FK_AsignaturaAlumno_Alumno">
+            <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="AsignaturaAlumno" EntitySet="AsignaturaAlumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AsignaturaAlumno_Asignatura" Association="Self.FK_AsignaturaAlumno_Asignatura">
+            <End Role="Asignatura" EntitySet="Asignatura" />
+            <End Role="AsignaturaAlumno" EntitySet="AsignaturaAlumno" />
           </AssociationSet>
           <AssociationSet Name="FK_Profesor_Rol_Operacion" Association="Self.FK_Profesor_Rol_Operacion">
             <End Role="Rol_Operacion" EntitySet="Rol_Operacion" />
@@ -174,7 +198,7 @@
           <Property Name="estado" Type="Boolean" />
           <Property Name="idRol" Type="Int32" />
           <NavigationProperty Name="Rol_Operacion" Relationship="Self.FK_Profesor_Rol_Operacion" FromRole="Profesor" ToRole="Rol_Operacion" />
-          <NavigationProperty Name="Asignatura" Relationship="dbColegioModel.FK_Asignatura_Profesor" FromRole="Profesor" ToRole="Asignatura" />
+          <NavigationProperty Name="Asignatura" Relationship="dbColegioModel.FK_Asignatura_Profesor1" FromRole="Profesor" ToRole="Asignatura" />
         </EntityType>
         <EntityType Name="Rol_Operacion">
           <Key>
@@ -222,19 +246,24 @@
             <End Role="Rol_Operacion" EntitySet="Rol_Operacion" />
             <End Role="Administrador" EntitySet="Administrador" />
           </AssociationSet>
-          <EntitySet Name="Asignatura" EntityType="dbColegioModel.Asignatura" />
-          <AssociationSet Name="FK_Asignatura_Profesor" Association="dbColegioModel.FK_Asignatura_Profesor">
-            <End Role="Profesor" EntitySet="Profesor" />
-            <End Role="Asignatura" EntitySet="Asignatura" />
-          </AssociationSet>
           <EntitySet Name="Alumno" EntityType="dbColegioModel.Alumno" />
           <AssociationSet Name="FK_Alumno_Rol_Operacion" Association="dbColegioModel.FK_Alumno_Rol_Operacion">
             <End Role="Rol_Operacion" EntitySet="Rol_Operacion" />
             <End Role="Alumno" EntitySet="Alumno" />
           </AssociationSet>
-          <AssociationSet Name="FK_Asignatura_Alumno" Association="dbColegioModel.FK_Asignatura_Alumno">
+          <EntitySet Name="AsignaturaAlumno" EntityType="dbColegioModel.AsignaturaAlumno" />
+          <AssociationSet Name="FK_AsignaturaAlumno_Alumno" Association="dbColegioModel.FK_AsignaturaAlumno_Alumno">
             <End Role="Alumno" EntitySet="Alumno" />
+            <End Role="AsignaturaAlumno" EntitySet="AsignaturaAlumno" />
+          </AssociationSet>
+          <EntitySet Name="Asignatura" EntityType="dbColegioModel.Asignatura" />
+          <AssociationSet Name="FK_Asignatura_Profesor1" Association="dbColegioModel.FK_Asignatura_Profesor1">
+            <End Role="Profesor" EntitySet="Profesor" />
             <End Role="Asignatura" EntitySet="Asignatura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AsignaturaAlumno_Asignatura" Association="dbColegioModel.FK_AsignaturaAlumno_Asignatura">
+            <End Role="Asignatura" EntitySet="Asignatura" />
+            <End Role="AsignaturaAlumno" EntitySet="AsignaturaAlumno" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Administrador">
@@ -261,29 +290,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Asignatura">
-          <Key>
-            <PropertyRef Name="idAsignatura" />
-          </Key>
-          <Property Name="idAsignatura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="idProfesor" Type="Int32" />
-          <Property Name="idAlumno" Type="Int32" />
-          <NavigationProperty Name="Profesor" Relationship="dbColegioModel.FK_Asignatura_Profesor" FromRole="Asignatura" ToRole="Profesor" />
-          <NavigationProperty Name="Alumno" Relationship="dbColegioModel.FK_Asignatura_Alumno" FromRole="Asignatura" ToRole="Alumno" />
-        </EntityType>
-        <Association Name="FK_Asignatura_Profesor">
-          <End Type="dbColegioModel.Profesor" Role="Profesor" Multiplicity="0..1" />
-          <End Type="dbColegioModel.Asignatura" Role="Asignatura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Profesor">
-              <PropertyRef Name="idProfesor" />
-            </Principal>
-            <Dependent Role="Asignatura">
-              <PropertyRef Name="idProfesor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Alumno">
           <Key>
             <PropertyRef Name="idAlumno" />
@@ -297,7 +303,7 @@
           <Property Name="estado" Type="Boolean" />
           <Property Name="idRol" Type="Int32" />
           <NavigationProperty Name="Rol_Operacion" Relationship="dbColegioModel.FK_Alumno_Rol_Operacion" FromRole="Alumno" ToRole="Rol_Operacion" />
-          <NavigationProperty Name="Asignatura" Relationship="dbColegioModel.FK_Asignatura_Alumno" FromRole="Alumno" ToRole="Asignatura" />
+          <NavigationProperty Name="AsignaturaAlumno" Relationship="dbColegioModel.FK_AsignaturaAlumno_Alumno" FromRole="Alumno" ToRole="AsignaturaAlumno" />
         </EntityType>
         <Association Name="FK_Alumno_Rol_Operacion">
           <End Type="dbColegioModel.Rol_Operacion" Role="Rol_Operacion" Multiplicity="0..1" />
@@ -311,15 +317,59 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Asignatura_Alumno">
-          <End Type="dbColegioModel.Alumno" Role="Alumno" Multiplicity="0..1" />
-          <End Type="dbColegioModel.Asignatura" Role="Asignatura" Multiplicity="*" />
+        <EntityType Name="AsignaturaAlumno">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idAlumno" Type="Int32" Nullable="false" />
+          <Property Name="idAsignatura" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Alumno" Relationship="dbColegioModel.FK_AsignaturaAlumno_Alumno" FromRole="AsignaturaAlumno" ToRole="Alumno" />
+          <NavigationProperty Name="Asignatura" Relationship="dbColegioModel.FK_AsignaturaAlumno_Asignatura" FromRole="AsignaturaAlumno" ToRole="Asignatura" />
+        </EntityType>
+        <Association Name="FK_AsignaturaAlumno_Alumno">
+          <End Type="dbColegioModel.Alumno" Role="Alumno" Multiplicity="1" />
+          <End Type="dbColegioModel.AsignaturaAlumno" Role="AsignaturaAlumno" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Alumno">
               <PropertyRef Name="idAlumno" />
             </Principal>
-            <Dependent Role="Asignatura">
+            <Dependent Role="AsignaturaAlumno">
               <PropertyRef Name="idAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Asignatura">
+          <Key>
+            <PropertyRef Name="idAsignatura" />
+          </Key>
+          <Property Name="idAsignatura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idProfesor" Type="Int32" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Profesor" Relationship="dbColegioModel.FK_Asignatura_Profesor1" FromRole="Asignatura" ToRole="Profesor" />
+          <NavigationProperty Name="AsignaturaAlumno" Relationship="dbColegioModel.FK_AsignaturaAlumno_Asignatura" FromRole="Asignatura" ToRole="AsignaturaAlumno" />
+        </EntityType>
+        <Association Name="FK_Asignatura_Profesor1">
+          <End Type="dbColegioModel.Profesor" Role="Profesor" Multiplicity="0..1" />
+          <End Type="dbColegioModel.Asignatura" Role="Asignatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesor">
+              <PropertyRef Name="idProfesor" />
+            </Principal>
+            <Dependent Role="Asignatura">
+              <PropertyRef Name="idProfesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AsignaturaAlumno_Asignatura">
+          <End Type="dbColegioModel.Asignatura" Role="Asignatura" Multiplicity="1" />
+          <End Type="dbColegioModel.AsignaturaAlumno" Role="AsignaturaAlumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asignatura">
+              <PropertyRef Name="idAsignatura" />
+            </Principal>
+            <Dependent Role="AsignaturaAlumno">
+              <PropertyRef Name="idAsignatura" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -375,16 +425,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Asignatura">
-            <EntityTypeMapping TypeName="dbColegioModel.Asignatura">
-              <MappingFragment StoreEntitySet="Asignatura">
-                <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
-                <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="idAsignatura" ColumnName="idAsignatura" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Alumno">
             <EntityTypeMapping TypeName="dbColegioModel.Alumno">
               <MappingFragment StoreEntitySet="Alumno">
@@ -396,6 +436,24 @@
                 <ScalarProperty Name="apellido" ColumnName="apellido" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AsignaturaAlumno">
+            <EntityTypeMapping TypeName="dbColegioModel.AsignaturaAlumno">
+              <MappingFragment StoreEntitySet="AsignaturaAlumno">
+                <ScalarProperty Name="idAsignatura" ColumnName="idAsignatura" />
+                <ScalarProperty Name="idAlumno" ColumnName="idAlumno" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asignatura">
+            <EntityTypeMapping TypeName="dbColegioModel.Asignatura">
+              <MappingFragment StoreEntitySet="Asignatura">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="idProfesor" ColumnName="idProfesor" />
+                <ScalarProperty Name="idAsignatura" ColumnName="idAsignatura" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

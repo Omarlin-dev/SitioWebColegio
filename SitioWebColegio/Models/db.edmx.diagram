@@ -11,11 +11,13 @@
         <AssociationConnector Association="dbColegioModel.FK_Profesor_Rol_Operacion" ManuallyRouted="false" />
         <EntityTypeShape EntityType="dbColegioModel.Administrador" Width="1.5" PointX="1" PointY="6.25" />
         <AssociationConnector Association="dbColegioModel.FK_Administrador_Rol_Operacion" />
-        <EntityTypeShape EntityType="dbColegioModel.Asignatura" Width="1.5" PointX="7.125" PointY="3.5" />
-        <AssociationConnector Association="dbColegioModel.FK_Asignatura_Profesor" />
         <EntityTypeShape EntityType="dbColegioModel.Alumno" Width="1.5" PointX="3" PointY="0.75" />
         <AssociationConnector Association="dbColegioModel.FK_Alumno_Rol_Operacion" />
-        <AssociationConnector Association="dbColegioModel.FK_Asignatura_Alumno" />
+        <EntityTypeShape EntityType="dbColegioModel.AsignaturaAlumno" Width="1.5" PointX="8.375" PointY="2.875" />
+        <AssociationConnector Association="dbColegioModel.FK_AsignaturaAlumno_Alumno" />
+        <EntityTypeShape EntityType="dbColegioModel.Asignatura" Width="1.5" PointX="5.25" PointY="6" />
+        <AssociationConnector Association="dbColegioModel.FK_Asignatura_Profesor1" />
+        <AssociationConnector Association="dbColegioModel.FK_AsignaturaAlumno_Asignatura" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
