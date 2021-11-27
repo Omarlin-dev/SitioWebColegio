@@ -12,7 +12,7 @@ namespace SitioWebColegio.Controllers
 {
     public class AdministradorController : Controller
     {
-        public administradorDatos admin = new administradorDatos();
+        private administradorDatos admin = new administradorDatos();
 
         // GET: Administrador
         [Autorizados(idOperacionadmin: 1)]

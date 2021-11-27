@@ -36,6 +36,12 @@ namespace SitioWebColegio.Datos
 
                 oAlumno.alumno = Alumnodb;
 
+                var asignaturaAlumno = db.AsignaturaAlumno.Where(d => d.idAlumno == Id).ToList();
+
+                oAlumno.asignaturas = (from d in asignaturaAlumno
+                                       join e in db.Asignatura.ToList() on d.idAsignatura equals e.idAsignatura
+                                       select e).ToList();
+
                 oAlumno.nombreAsignatura = oAlumno.asignaturas.Select(d => d.nombre).Distinct().ToList();
 
             }

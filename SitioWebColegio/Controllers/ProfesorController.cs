@@ -149,7 +149,7 @@ namespace SitioWebColegio.Controllers
         public ActionResult AsignaturaEliminar(int Id)
         {
 
-            TempData["MensajeEliminarA"] = "Asignatura  Eliminada con exito";
+            TempData["MensajeEliminarA"] = "Asignatura Eliminada con exito";
 
             datosAsignatura.AsignaturaEliminar(Id);
 
