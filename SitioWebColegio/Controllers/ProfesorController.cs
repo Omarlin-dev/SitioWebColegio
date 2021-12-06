@@ -83,9 +83,16 @@ namespace SitioWebColegio.Controllers
         public ActionResult Eliminar(int Id)
         {
            
-            TempData["MensajeEliminarP"] = "Profesor/a Eliminado/a con exito";
-            datosProfesor.Eliminar(Id);
+           bool resultadoEliminar =datosProfesor.Eliminar(Id);
+            if (resultadoEliminar)
+            {
+                TempData["MensajeEliminarP"] = "Profesor/a Eliminado/a con exito";
+            }
+            else
+            {
+                TempData["MensajeEliminarP"] = "No se puede eliminar este Profesor, tiene asignaturas asignadas";
 
+            }
             return Redirect("IndexAdmin");
         }
 
@@ -148,10 +155,18 @@ namespace SitioWebColegio.Controllers
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult AsignaturaEliminar(int Id)
         {
+           bool resultadoEliminar = datosAsignatura.AsignaturaEliminar(Id);
 
-            TempData["MensajeEliminarA"] = "Asignatura Eliminada con exito";
+            if (resultadoEliminar)
+            {
+                TempData["MensajeEliminarA"] = "Asignatura Eliminada con exito";
+            }
+            else
+            {
+                TempData["MensajeEliminarA"] = "No se puede elimnar esta Asignatura, tiene asignaturas de alumnos Asignadas";
 
-            datosAsignatura.AsignaturaEliminar(Id);
+            }
+
 
             return Redirect("Asignatura");
         }

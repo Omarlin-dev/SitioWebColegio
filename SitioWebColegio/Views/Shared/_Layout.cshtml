@@ -30,22 +30,24 @@
 
                     @if (Session["Administrador"] == null && Session["Profesor"] == null && Session["Alumno"] == null)
                     {
-        <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Acceso/Login")">Iniciar Sesion</a></li> }
-                    else
-                    {
-        <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Acceso/Logof")">Cerrar sesion</a></li>}
+                <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Acceso/Login")">Iniciar Sesion</a></li>}
+
                     @if (Session["userTitulo"] != null)
                     {
                         if (Session["Administrador"] != null)
                         {
-        <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Administrador/Index")"><i class="fas fa-user"></i> @Session["userTitulo"]</a></li> }
-                        if (Session["Profesor"] != null)
-                        {
-        <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Profesor/IndexProfesores")"><i class="fas fa-user"></i> @Session["userTitulo"]</a></li> }
-                        if (Session["Alumno"] != null)
-                        {
-        <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Alumno/TodosAlumnos")"><i class="fas fa-user"></i> @Session["userTitulo"]</a></li>}
-                    }
+                <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Administrador/Index")"><i class="fas fa-user"></i>Bienvenido @Session["userTitulo"]</a></li> }
+                                if (Session["Profesor"] != null)
+                                {
+                <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Profesor/IndexProfesores")"><i class="fas fa-user"></i>Bienvenido @Session["userTitulo"]</a></li> }
+                                if (Session["Alumno"] != null)
+                                {
+                <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Alumno/TodosAlumnos")"><i class="fas fa-user"></i>Bienvenido @Session["userTitulo"]</a></li>}
+                            }
+
+                    @if (!(Session["Administrador"] == null && Session["Profesor"] == null && Session["Alumno"] == null))
+                    {
+                <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Acceso/Logof")">Cerrar sesion</a></li>}
                 </ul>
             </div>
         </div>

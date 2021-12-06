@@ -8,7 +8,7 @@
 
 <h2>
  
-        <a style="float: right; color: blue; font-size:35px;" href="@Url.Content("~/Alumno/TodosAlumnosAdmin")"><i style="font-size: 30px;" class="fas fa-arrow-alt-circle-left"></i></a>
+        <a style="float: right; color: blue; font-size:35px; margin-bottom: 25px;" href="@Url.Content("~/Alumno/TodosAlumnosAdmin")"><i style="font-size: 30px;" class="fas fa-arrow-alt-circle-left"></i></a>
     
     
 </h2>
@@ -34,7 +34,6 @@
     <table class="table table-bordered table-hover w-100" id="datatable">
         <thead>
             <tr>
-                <th>#</th>
                 <th>Id Alumno</th>
                 <th>Id Asignatura</th>
                 <th>Acciones</th>
@@ -59,7 +58,6 @@
                     "datatype": "json"
                 },
                 "columns": [
-                    { "data": "Id" },
                     { "data": "idAlumno" },
                     { "data": "idAsignatura" },
                     {

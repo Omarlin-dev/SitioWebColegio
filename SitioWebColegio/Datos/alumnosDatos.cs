@@ -17,7 +17,7 @@ namespace SitioWebColegio.Datos
                 return oAlumno;
             }
         }
-
+             
         public List<Alumno> ConsultarAlumno()
         {
             using (DBColegioEntities db = new DBColegioEntities())
@@ -78,13 +78,21 @@ namespace SitioWebColegio.Datos
             }
         }
 
-        public void Eliminar(int Id)
+        public bool Eliminar(int Id)
         {
             using (DBColegioEntities db = new DBColegioEntities())
             {
                var alumno= db.Alumno.FirstOrDefault(d => d.idAlumno == Id);
-                db.Alumno.Remove(alumno);
-                db.SaveChanges();
+
+                if(alumno.idAlumno != db.AsignaturaAlumno.FirstOrDefault(d => d.idAlumno == alumno.idAlumno)?.idAlumno)
+                {
+                    db.Alumno.Remove(alumno);
+                    db.SaveChanges();
+                    return true;
+                }
+
+                return false;
+                
             }
         }
 

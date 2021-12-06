@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
+using System.Web.Mvc; 
 
 namespace SitioWebColegio.Controllers
 {
@@ -87,8 +87,16 @@ namespace SitioWebColegio.Controllers
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult EliminarAlumno(int Id)
         {
-                datos.Eliminar(Id);
-                TempData["MensajeEliminarP"] = "Alumno Eliminado con exito";                         
+                bool resultadoEliminar = datos.Eliminar(Id);
+
+            if (resultadoEliminar)
+            {
+                TempData["MensajeEliminarP"] = "Alumno Eliminado con exito";
+            }
+            else
+            {
+                TempData["MensajeEliminarP"] = "No se puede eliminar este alumno, tiene asignaturas Asignadas";
+            }
 
             return Redirect("TodosAlumnosAdmin");
         }

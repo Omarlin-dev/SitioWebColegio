@@ -76,15 +76,19 @@ namespace SitioWebColegio.Datos
             }
         }
 
-        public void Eliminar(int Id)
+        public bool Eliminar(int Id)
         {
             using (DBColegioEntities db = new DBColegioEntities())
             {
                 var profesordb = db.Profesor.FirstOrDefault(d => d.idProfesor == Id);
 
-                db.Profesor.Remove(profesordb);
-                db.SaveChanges();
-
+            if(profesordb.idProfesor != db.Asignatura.FirstOrDefault(d => d.idProfesor == profesordb.idProfesor)?.idProfesor)
+             {
+                    db.Profesor.Remove(profesordb);
+                    db.SaveChanges();
+                    return true;
+             }
+                return false;
             }
         }
         

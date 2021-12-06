@@ -77,14 +77,20 @@ namespace SitioWebColegio.Datos
             }
         }
 
-        public void AsignaturaEliminar(int Id)
+        public bool AsignaturaEliminar(int Id)
         {
             using (DBColegioEntities db = new DBColegioEntities())
             {
                 var oAsignatura = db.Asignatura.FirstOrDefault(d => d.idAsignatura == Id);
 
-                db.Asignatura.Remove(oAsignatura);
-                db.SaveChanges();
+                if(oAsignatura.idAsignatura != db.AsignaturaAlumno.FirstOrDefault(d => d.idAsignatura == oAsignatura.idAsignatura)?.idAsignatura)
+                {
+                    db.Asignatura.Remove(oAsignatura);
+                    db.SaveChanges();
+
+                    return true;
+                }
+                return false;
 
             }
         }
