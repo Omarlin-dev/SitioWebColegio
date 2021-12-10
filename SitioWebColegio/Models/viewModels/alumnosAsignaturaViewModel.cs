@@ -10,5 +10,6 @@ namespace SitioWebColegio.Models.viewModels
         public int Id { get; set; }
         public int idAlumno { get; set; }
         public int idAsignatura { get; set; }
+        
     }
 }
