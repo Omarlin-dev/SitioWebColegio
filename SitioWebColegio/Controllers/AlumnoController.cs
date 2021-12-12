@@ -57,8 +57,6 @@ namespace SitioWebColegio.Controllers
             return View();
         }
 
-
-
         public ActionResult GetDataAlumnos()
         {
 
