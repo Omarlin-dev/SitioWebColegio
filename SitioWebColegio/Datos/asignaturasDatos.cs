@@ -22,17 +22,21 @@ namespace SitioWebColegio.Datos
 
             return model;
         }
+              
 
-        public List<asignaturaViewModel> GetAsignaturas()
+        public List<Asignatura> GetAsignaturas()
         {
-            var lst = new List<asignaturaViewModel>();
             using (DBColegioEntities db = new DBColegioEntities())
             {
-                lst = AutoMapper.Mapper.Map<List<asignaturaViewModel>>(db.Asignatura.ToList());
+                var lst = db.Asignatura.Include("Profesor").ToList();
+
+                return lst;
+
             }
 
-            return lst;
         }
+
+       
 
         public void AsignaturaNuevo(AlumnoProfesorAsignaturaViewModel omodel)
         {

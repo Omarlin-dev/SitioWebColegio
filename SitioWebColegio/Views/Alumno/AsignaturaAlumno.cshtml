@@ -1,16 +1,17 @@
-﻿@{
+﻿@model IEnumerable<SitioWebColegio.Models.AsignaturaAlumno>
+@{ 
     ViewBag.Title = "Asignatura Alumno";
     Layout = "~/Views/Shared/LayoutAdministrador.cshtml";
-}
+  }
 
 <h4 class="text-center">Asignaturas Alumnos</h4>
 <a class="btn btn-success" href="@Url.Content("~/Alumno/AsignaturaNuevoAlumno")">Nuevo</a>
 
 <h2>
- 
-        <a style="float: right; color: blue; font-size:35px; margin-bottom: 25px;" href="@Url.Content("~/Alumno/TodosAlumnosAdmin")"><i style="font-size: 30px;" class="fas fa-arrow-alt-circle-left"></i></a>
-    
-    
+
+    <a style="float: right; color: blue; font-size:35px; margin-bottom: 25px;" href="@Url.Content("~/Alumno/TodosAlumnosAdmin")"><i style="font-size: 30px;" class="fas fa-arrow-alt-circle-left"></i></a>
+
+
 </h2>
 
 <style>
@@ -30,56 +31,37 @@
     </div>
 }
 
-<div>
     <table class="table table-bordered table-hover w-100" id="datatable">
-        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Alumno.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Asignatura.nombre)
+            </th>
+            <th>Acciones</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>Id Alumno</th>
-                <th>Id Asignatura</th>
-                <th>Acciones</th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Alumno.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Asignatura.nombre)
+                </td>
+                <td>
+                    <a class='btn btn-warning' href='@Url.Content("~/Alumno/AsignaturaEditarAlumno?Id=") + @item.Id ' )><i class='fa fa-pencil'></i> Editar</a>
+                    <a class='btn btn-danger' style='margin-left:5px' onclick='return jsEliminar();' href='@Url.Content("~/Alumno/AsignaturaEliminarAlumno?Id=") + @item.Id  ' )><i class='fa fa-trash'></i> Eliminar</a>
+                </td>
             </tr>
-        </thead>
+        }
+
     </table>
-</div>
 
-<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-
-@section scripts{
-    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-    <script>
-        var dataTable;
-        $(document).ready(function () {
-            dataTable = $("#datatable").DataTable({
-                "ajax": {
-                    "url": "/Alumno/GetDataAlumnosAsignaturas",
-                    "type": "GET",
-                    "datatype": "json"
-                },
-                "columns": [
-                    { "data": "idAlumno" },
-                    { "data": "idAsignatura" },
-                    {
-                        "data": "Id", "render": function (data) {
-                            return "<a class='btn btn-warning' href='@Url.Content("~/Alumno/AsignaturaEditarAlumno?Id=")" + data + "')><i class='fa fa-pencil'></i> Editar</a><a class='btn btn-danger' style='margin-left:5px' onclick='return jsEliminar();' href='@Url.Content("~/Alumno/AsignaturaEliminarAlumno?Id=")" + data + "')><i class='fa fa-trash'></i> Eliminar</a>";
-                        },
-
-
-                        "searchable":false,
-                        "width":"150px"
-                    }
-
-                ],
-                "language": {
-
-                    "emptyTable" : "No tiene Datos, porfavor presecione click en <b>Nuevo</b> Button"
-                }
-            });
-        });
-
+<script>
     function jsEliminar() {
         return confirm("Estas Seguro que deseas eliminar este registro?");
     }
-    </script>
-}
+</script>

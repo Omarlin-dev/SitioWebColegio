@@ -112,7 +112,7 @@ namespace SitioWebColegio.Controllers
             if (resultadoEliminar)
             {
                 TempData["MensajeEliminarP"] = "Alumno Eliminado con exito";
-            }
+            } 
             else
             {
                 TempData["MensajeEliminarP"] = "No se puede eliminar este alumno, tiene asignaturas Asignadas";
@@ -126,16 +126,12 @@ namespace SitioWebColegio.Controllers
         {
             ViewBag.mensajeEliminar = TempData["MensajeEliminarA"];
 
-            return View();
+            var lst = datosAsignatura.GetAsignaturaAlumnos();
+
+            return View(lst);
         }
 
-        public ActionResult GetDataAlumnosAsignaturas()
-        {
-            var lst = datosAsignatura.GetAsignaturas();
-
-            return Json(new { data = lst }, JsonRequestBehavior.AllowGet);
-        }
-
+     
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult AsignaturaNuevoAlumno()
         {

@@ -128,18 +128,15 @@ namespace SitioWebColegio.Controllers
             return Redirect("IndexAdmin");
         }
 
+
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult Asignatura()
         {
             ViewBag.mensajeEliminar = TempData["MensajeEliminarA"];
-            return View();
-        }
 
-        public ActionResult GetDataProfesoresAsignaturas()
-        {
             var lst = datosAsignatura.GetAsignaturas();
 
-            return Json(new { data = lst }, JsonRequestBehavior.AllowGet);
+            return View(lst);
         }
 
         [Autorizados(idOperacionadmin: 1)]

@@ -18,7 +18,17 @@ namespace SitioWebColegio.Datos
             }
         }
 
-    public asignaturaAlumnoViewModel consultarGuardarAsignatura()
+        public List<AsignaturaAlumno> GetAsignaturaAlumnos()
+        {
+            using (var db = new DBColegioEntities())
+            {
+                var asignaturaAlumno = db.AsignaturaAlumno.Include("Asignatura").Include("Alumno").ToList();
+
+                return asignaturaAlumno;
+            }
+        }
+
+        public asignaturaAlumnoViewModel consultarGuardarAsignatura()
         {
             var modelo = new asignaturaAlumnoViewModel();
 

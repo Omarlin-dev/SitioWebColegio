@@ -362,7 +362,6 @@
     <Content Include="Views\Profesor\Nuevo.cshtml" />
     <Content Include="Views\Profesor\Editar.cshtml" />
     <Content Include="Views\Shared\LayoutProfesor.cshtml" />
-    <Content Include="Views\Profesor\Asignatura.cshtml" />
     <Content Include="Views\Profesor\AsignaturaNuevo.cshtml" />
     <Content Include="Views\Profesor\AsignaturaEditar.cshtml" />
     <Content Include="Views\Alumno\TodosAlumnos.cshtml" />
@@ -370,7 +369,6 @@
     <Content Include="Views\Alumno\TodosAlumnosAdmin.cshtml" />
     <Content Include="Views\Alumno\NuevoAlumno.cshtml" />
     <Content Include="Views\Alumno\EditarAlumno.cshtml" />
-    <Content Include="Views\Alumno\AsignaturaAlumno.cshtml" />
     <Content Include="Views\Alumno\AsignaturaNuevoAlumno.cshtml" />
     <Content Include="Views\Alumno\AsignaturaEditarAlumno.cshtml" />
     <Content Include="Views\Acceso\Login.cshtml" />
@@ -389,6 +387,8 @@
     <Content Include="Views\Alumno\CompanerosClase.cshtml" />
     <Content Include="Views\Profesor\AlumnosProfesor.cshtml" />
     <Content Include="Views\Profesor\MateriasProfesor.cshtml" />
+    <Content Include="Views\Alumno\AsignaturaAlumno.cshtml" />
+    <Content Include="Views\Profesor\Asignatura.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

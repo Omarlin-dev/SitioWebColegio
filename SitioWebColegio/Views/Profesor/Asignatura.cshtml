@@ -1,4 +1,5 @@
-﻿@model List<SitioWebColegio.Models.viewModels.asignaturaViewModel>
+﻿@model IEnumerable<SitioWebColegio.Models.Asignatura>
+
 
 @{
     ViewBag.Title = "Asignatura profesor";
@@ -9,9 +10,9 @@
 <a class="btn btn-success" href="@Url.Content("~/Profesor/AsignaturaNuevo")">Nuevo</a>
 
 <h2>
-   
-    
-        <a style="float: right; color: blue;" href="@Url.Content("~/Profesor/IndexAdmin")"><i style="font-size: 30px;" class="fas fa-arrow-alt-circle-left"></i></a>
+
+
+    <a style="float: right; color: blue;" href="@Url.Content("~/Profesor/IndexAdmin")"><i style="font-size: 30px;" class="fas fa-arrow-alt-circle-left"></i></a>
 
 
 </h2>
@@ -34,59 +35,39 @@
 }
 
 
-<div>
     <table class="table table-bordered table-hover w-100" id="datatable">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Id Profesor</th>
-                <th>Acciones</th>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Profesor.nombre)
+            </th>
+            <th>Acciones</th>
 
-            </tr>
-        </thead>
-    </table>
-</div>
+        </tr>
 
-<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Profesor.nombre)
+                    </td>
+                    <td>
+                        <a class='btn btn-warning' href='@Url.Content("~/Profesor/AsignaturaEditar?Id=") + @item.idAsignatura ' )><i class='fa fa-pencil'></i> Editar</a>
+                        <a class='btn btn-danger' style='margin-left:5px' onclick='return jsEliminar();' href='@Url.Content("~/Profesor/AsignaturaEliminar?Id=") + @item.idAsignatura ' )><i class='fa fa-trash'></i> Eliminar</a>
+                    </td>
+                </tr>
+            }
 
-@section scripts{
-    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
-    <script>
-        var dataTable;
-        $(document).ready(function () {
-            dataTable = $("#datatable").DataTable({
-                "ajax": {
-                    "url": "/Profesor/GetDataProfesoresAsignaturas",
-                    "type": "GET",
-                    "datatype": "json"
-                },
-                "columns": [
-                    { "data": "idAsignatura" },
-                    { "data": "nombre" },
-                    { "data": "idProfesor" },
-                    {
-                        "data": "idAsignatura", "render": function (data) {
-                            return "<a class='btn btn-warning' href='@Url.Content("~/Profesor/AsignaturaEditar?Id=")" + data + "')><i class='fa fa-pencil'></i> Editar</a><a class='btn btn-danger' style='margin-left:5px' onclick='return jsEliminar();' href='@Url.Content("~/Profesor/AsignaturaEliminar?Id=")" + data + "')><i class='fa fa-trash'></i> Eliminar</a>";
-                        },
+        </table>
 
 
-                        "searchable":false,
-                        "width":"150px"
-                    }
-
-                ],
-                "language": {
-
-                    "emptyTable" : "No tiene Datos, porfavor presecione click en <b>Nuevo</b> Button"
-                }
-            });
-        });
-
+<script>
     function jsEliminar() {
         return confirm("Estas Seguro que deseas eliminar este registro?");
     }
-    </script>
-}
+</script>
