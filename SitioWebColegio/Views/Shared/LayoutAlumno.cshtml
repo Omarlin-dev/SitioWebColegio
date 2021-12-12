@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/img/Emma.ico" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="height: 60px;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="@Url.Content("~/Home/Index")"><img style="height: 60px; width: 60px;" src="~/img/Em.png" /> Escuela Emma Balaguer Vallejo</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Profesor/IndexProfesores")">Profesores</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Alumno/MateriasAlumnos")">Materias</a></li>
+
+                    @if (Session["userTitulo"] != null)
+                    {
+
+
+                        if (Session["Alumno"] != null)
+                        {
+                            <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Alumno/MateriasAlumnos")"><i class="fas fa-user"></i>Bienvenido/a @Session["userTitulo"]</a></li>
+}
+                    }
+                    <li class="nav-item"><a class="nav-link active" href="@Url.Content("~/Acceso/Logof")">Cerrar sesion</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container body-content" style="margin-top: 90px;">
+        @RenderBody()
+
+
+        <footer id="footer">
+            <div class="container" style="background: silver;">
+
+                <div class="row">
+                    <div class="col-12 col-lg" style="text-align: center; padding-top: 15px; padding-bottom: 15px;">
+                        <a class="link" href="https://www.facebook.com/emma.balaguer.9" target="_blank"><i class="face fab fa-facebook"></i></a>
+                    </div>
+
+                    <div class="col-12 col-lg" style="text-align: center; padding-top: 15px; padding-bottom: 15px;">
+                        <a href="https://www.instagram.com/centroemmabalaguer/" target="_blank"><i class="ig fab fa-instagram"></i></a>
+                    </div>
+
+                    <div class="col-12 col-lg" style="text-align: center; padding-top: 15px; padding-bottom: 15px;">
+                        <a href="https://wa.me/18294215051" target="_blank"><i class="ws fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div id="copyright" style="color:white; text-align: center;">Copyright&copy; 2021 - Centro Emma Balaguer de Vallejo - Todos los derechos reservados</div>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/bootstrap.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+

@@ -60,7 +60,7 @@ namespace SitioWebColegio.Controllers
 
                         Session["Profesor"] = oUser;
                         Session["userTitulo"] = oUser.nombre;
-                        return RedirectToAction("IndexProfesores", "Profesor");
+                        return RedirectToAction("AlumnosProfesor", "Profesor");
 
                     }
 
@@ -79,7 +79,7 @@ namespace SitioWebColegio.Controllers
                         Session["Alumno"] = oUser;
                         Session["userTitulo"] = oUser.nombre;
 
-                        return RedirectToAction("TodosAlumnos", "Alumno");
+                        return RedirectToAction("MateriasAlumnos", "Alumno");
                     }
                 }
           

@@ -1,5 +1,5 @@
 ﻿@{ ViewBag.Title = "Profesores";
-    Layout = "~/Views/Shared/LayoutProfesor.cshtml"; }
+    Layout = "~/Views/Shared/LayoutAlumno.cshtml"; }
 
 <h4 class="text-center">Profesores</h4>
 <style>
@@ -61,13 +61,12 @@
 
 <div>
     <table class="table table-bordered table-hover w-100" id="datatable">
-        <thead class="bg-black text-white">
+        <thead>
             <tr>
                 <th>#</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Especialidad</th>
-                <th>Acciones</th>
             </tr>
         </thead>
     </table>
@@ -84,7 +83,7 @@
         $(document).ready(function () {
             dataTable = $("#datatable").DataTable({
                 "ajax": {
-                    "url": "/Profesor/GetDataProfesorTodos",
+                    "url": "/Profesor/GetDataProfesorAlumno",
                     "type": "GET",
                     "datatype": "json"
                 },
@@ -93,12 +92,7 @@
                     { "data": "nombre" },
                     { "data": "apellido" },
                     { "data": "especialidad" },
-                     {
-                        "data": "idProfesor", "render": function (data) {
-                            return "<a class='btn btn-primary' href='@Url.Content("~/Profesor/DetalleProfesor?Id=")" + data + "')><i class='fas fa-eye'></i>Ver Mas</a>";
-                         },
-
-                     }
+                 
                 ],
                 "language": {
 

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<SitioWebColegio.Models.Alumno>
+
+@{
+    ViewBag.Title = "Companeros Clase";
+    Layout = "~/Views/Shared/LayoutAlumno.cshtml";
+
+}
+
+<section style="margin-top: 110px;">
+    <h4 class="text-center">Companeros Clase</h4>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefono)
+                </td>
+            </tr>
+        }
+
+    </table>
+</section>

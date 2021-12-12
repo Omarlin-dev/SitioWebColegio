@@ -1,0 +1,35 @@
+﻿@model IEnumerable<SitioWebColegio.Models.Asignatura>
+
+@{
+    ViewBag.Title = "Materias Profesor";
+    Layout = "~/Views/Shared/LayoutProfesor.cshtml";
+
+}
+
+<section style="margin-top: 100px;"></section>
+
+<h4 style="text-align: center;">Materias Profesor</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Profesor.nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Profesor.nombre)
+        </td>
+    </tr>
+}
+
+</table>

@@ -30,6 +30,12 @@ namespace SitioWebColegio.Filtro
             this.idOperacionProfesor = idOperacionProfesor;
             this.idOperacionAlumno = idOperacionAlumno;
         }
+
+        public Autorizados(int idOperacionAlumno, int Id) 
+        {
+            this.idOperacionAlumno = idOperacionAlumno;
+        }
+
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             try

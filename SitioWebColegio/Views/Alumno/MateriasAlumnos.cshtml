@@ -1,0 +1,39 @@
+﻿@model IEnumerable<SitioWebColegio.Models.Asignatura>
+
+@{
+    ViewBag.Title = "MateriasAlumnos";
+    Layout = "~/Views/Shared/LayoutAlumno.cshtml";
+}
+<section style="margin-top: 110px;">
+<h4 class="text-center">Materias Alumnos</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            Asignatura
+        </th>
+        <th>
+            Profesor
+        </th>
+        <th>
+            Acciones
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Profesor.nombre)
+    </td>
+    <td>
+        <a class='btn btn-primary' href='@Url.Content("~/Alumno/CompanerosClase?Id=") + @item.idAsignatura '><i class='fas fa-eye'></i>Ver Companeros</a>
+    </td>
+</tr>
+}
+
+</table>
+
+</section>

@@ -15,16 +15,41 @@ namespace SitioWebColegio.Controllers
         private profesorDatos datosProfesor = new profesorDatos();
         private asignaturasDatos datosAsignatura = new asignaturasDatos();
         // GET: Profesores
-        [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 6, idOperacionAlumno: 11)]
+        [Autorizados(idOperacionadmin: 0, idOperacionProfesor: 0, idOperacionAlumno: 11)]
         public ActionResult IndexProfesores()
         {
             return View();
-        }        
+        }
 
-        [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 7, idOperacionAlumno: 12)]
+        [Autorizados(idOperacionadmin: 0, idOperacionProfesor: 9, idOperacionAlumno: 0)]
+        public ActionResult AlumnosProfesor()
+        {
+            var lst = datosProfesor.GetDataAlumnosProfesores();
+
+            return View(lst);
+
+        }
+
+        [Autorizados(idOperacionadmin: 0, idOperacionProfesor: 9, idOperacionAlumno: 0)]
+        public ActionResult MateriasProfesor()
+        {
+            var lst = datosProfesor.GetDataAsignaturaProfesor();
+
+            return View(lst);
+
+        }
+
+        [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 0, idOperacionAlumno: 0)]
         public ActionResult DetalleProfesor(int Id)
         {
             var profesor = datosProfesor.DetalleProfesor(Id);
+            return View(profesor);
+        }
+
+        [Autorizados(idOperacionAlumno:13, 0)]
+        public ActionResult DetalleProfesorAlumno(int Id)
+        {
+            var profesor = datosProfesor.detalleProfesorAlumno(Id);
             return View(profesor);
         }
 
@@ -43,6 +68,13 @@ namespace SitioWebColegio.Controllers
 
         }
 
+        public ActionResult GetDataProfesorAlumno()
+        {
+            var lst = datosProfesor.GetDataProfesoresAlumno();
+            return Json(new { data = lst }, JsonRequestBehavior.AllowGet);
+
+        }
+
         [Autorizados(idOperacionadmin: 1)]
         public ActionResult Nuevo()
         {
@@ -50,7 +82,7 @@ namespace SitioWebColegio.Controllers
         }
         [Autorizados(idOperacionadmin: 1)]
         [HttpPost]
-        public ActionResult Nuevo(profesorViewModel model)
+        public ActionResult Nuevo(ProfesorOnlyViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
@@ -68,7 +100,7 @@ namespace SitioWebColegio.Controllers
 
         [Autorizados(idOperacionadmin: 1)]
         [HttpPost]
-        public ActionResult Editar(profesorViewModel model)
+        public ActionResult Editar(ProfesorOnlyViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);

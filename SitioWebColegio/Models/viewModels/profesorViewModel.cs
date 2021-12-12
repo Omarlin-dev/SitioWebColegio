@@ -28,5 +28,7 @@ namespace SitioWebColegio.Models.viewModels
         // public virtual Asignatura AsignaturaModel { get; set; }
         public List<Asignatura> asiginaturas { get; set; }
         public List<string> nombreAsignatura { get; set; } 
+
+        public Asignatura asignatura { get; set; }
     }
 }

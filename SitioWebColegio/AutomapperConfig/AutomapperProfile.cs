@@ -24,11 +24,18 @@ namespace SitioWebColegio.AutomapperConfig
             CreateMap<Profesor, profesorViewModel>();
             CreateMap<profesorViewModel, Profesor>();
 
+            CreateMap<Profesor, ProfesorOnlyViewModel>();
+            CreateMap<ProfesorOnlyViewModel, Profesor>();
+
+            CreateMap<Profesor, ProfesorAsignaturaViewModel>();
+            CreateMap<ProfesorAsignaturaViewModel, Profesor>();
+
             CreateMap<AsignaturaAlumno, asignaturaAlumnoViewModel>();
             CreateMap<asignaturaAlumnoViewModel, AsignaturaAlumno>();
 
             CreateMap<AsignaturaAlumno, alumnosAsignaturaViewModel>();
             CreateMap<alumnosAsignaturaViewModel, AsignaturaAlumno>();
+                       
 
         }
     }

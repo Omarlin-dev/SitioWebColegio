@@ -17,7 +17,37 @@ namespace SitioWebColegio.Datos
                 return oAlumno;
             }
         }
-             
+
+        public List<Asignatura> GetDataMateriaAlumnos()
+        {
+            var alumno = (Alumno)HttpContext.Current.Session["Alumno"];
+
+            using (DBColegioEntities db = new DBColegioEntities())
+            {
+                var asignaturaProfesor = (from asignaturaAlumno in db.AsignaturaAlumno.Where(d => d.idAlumno == alumno.idAlumno).ToList()
+                                          join asignatura in db.Asignatura.Include("Profesor").ToList()
+                                          on asignaturaAlumno.idAsignatura equals asignatura.idAsignatura
+                                          select asignatura).ToList();
+
+                return asignaturaProfesor;
+            }          
+        }
+
+        public List<Alumno> GetDataCompanerosClase(int Id)
+        {
+            using (DBColegioEntities db = new DBColegioEntities())
+            {
+                var AlumnosClase = (from asignatura in db.Asignatura.Where(d => d.idAsignatura == Id).ToList()
+                                          join asignaruraAlumno in db.AsignaturaAlumno.ToList()
+                                          on asignatura.idAsignatura equals asignaruraAlumno.idAsignatura
+                                          join alumnos in db.Alumno.ToList()
+                                          on asignaruraAlumno.idAlumno equals alumnos.idAlumno
+                                          select alumnos).ToList();
+
+                return AlumnosClase;
+            }
+        }
+
         public List<Alumno> ConsultarAlumno()
         {
             using (DBColegioEntities db = new DBColegioEntities())

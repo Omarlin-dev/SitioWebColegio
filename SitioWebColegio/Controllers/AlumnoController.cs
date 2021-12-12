@@ -17,12 +17,30 @@ namespace SitioWebColegio.Controllers
         private alumnoAsignaturaDatos datosAsignatura = new alumnoAsignaturaDatos();
 
         // GET: Alumno
-        [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 8, idOperacionAlumno: 13)]
+        [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 0, idOperacionAlumno: 0)]
         public ActionResult TodosAlumnos()
         {
             return View();
 
         }
+
+        [Autorizados(idOperacionAlumno:13, 0)]
+        public ActionResult MateriasAlumnos()
+        {
+            var lst = datos.GetDataMateriaAlumnos();
+
+            return View(lst);
+
+        }
+
+        [Autorizados(idOperacionAlumno: 13, 0)]
+        public ActionResult CompanerosClase(int Id)
+        {
+            var lst = datos.GetDataCompanerosClase(Id);
+
+            return View(lst);
+
+        }       
 
         [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 9, idOperacionAlumno: 14)]
         public ActionResult DetalleAlumno(int Id)
@@ -38,6 +56,8 @@ namespace SitioWebColegio.Controllers
 
             return View();
         }
+
+
 
         public ActionResult GetDataAlumnos()
         {

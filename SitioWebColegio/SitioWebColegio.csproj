@@ -48,10 +48,10 @@
       <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -185,6 +185,8 @@
     <Compile Include="Models\viewModels\asignaturaAlumnoViewModel.cs" />
     <Compile Include="Models\viewModels\asignaturaViewModel.cs" />
     <Compile Include="Models\viewModels\LoginViewModel.cs" />
+    <Compile Include="Models\viewModels\ProfesorAsignaturaViewModel.cs" />
+    <Compile Include="Models\viewModels\ProfesorOnlyViewModel.cs" />
     <Compile Include="Models\viewModels\profesorViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -221,6 +223,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Imagenes\bgLogin.jpg" />
+    <Content Include="Imagenes\bgLogin2.jpg" />
     <Content Include="img\1.jpg" />
     <Content Include="img\2.jpg" />
     <Content Include="img\5.jpg" />
@@ -380,6 +383,12 @@
     <Content Include="Views\Home\Informatica.cshtml" />
     <Content Include="Views\Home\Mercadeo.cshtml" />
     <Content Include="Views\Home\Refigeracion.cshtml" />
+    <Content Include="Views\Profesor\DetalleProfesorAlumno.cshtml" />
+    <Content Include="Views\Shared\LayoutAlumno.cshtml" />
+    <Content Include="Views\Alumno\MateriasAlumnos.cshtml" />
+    <Content Include="Views\Alumno\CompanerosClase.cshtml" />
+    <Content Include="Views\Profesor\AlumnosProfesor.cshtml" />
+    <Content Include="Views\Profesor\MateriasProfesor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
