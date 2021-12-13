@@ -39,6 +39,14 @@ namespace SitioWebColegio.Controllers
 
         }
 
+        [Autorizados(idOperacionadmin: 0, idOperacionProfesor: 9, idOperacionAlumno: 0)]
+        public ActionResult AlumnosAsignaturaProfesor(int Id)
+        {
+            var lst = datosProfesor.GetDataAsignaturaAlumnosProfesor(Id);
+
+            return View(lst);
+        }
+
         [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 0, idOperacionAlumno: 0)]
         public ActionResult DetalleProfesor(int Id)
         {

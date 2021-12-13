@@ -48,6 +48,7 @@ namespace SitioWebColegio.Datos
             }
         }
 
+
         public List<Alumno> ConsultarAlumno()
         {
             using (DBColegioEntities db = new DBColegioEntities())

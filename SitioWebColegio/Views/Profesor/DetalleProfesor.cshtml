@@ -1,4 +1,4 @@
-﻿@model SitioWebColegio.Models.viewModels.profesorViewModel
+﻿@model SitioWebColegio.Models.viewModels.ProfesorAsignaturaViewModel
 
 @{
     ViewBag.Title = "DetalleProfesor";
@@ -18,31 +18,29 @@
     Detalle Profesor
 </h2>
 
-@if (Model.idProfesor <= 0 )
+@if (Model.profesorone.idProfesor <= 0 )
 {
     <h3>El ID del Profesor no existe</h3>
 }
 
 else
 {
-    <div class="form-group">
-        <label>#: </label>
-        @Model.idProfesor
-    </div>
 
     <div class="form-group">
         <label>Nombre: </label>
-        @Model.nombre
+        @Model.profesorone.nombre
     </div>
 
     <div class="form-group">
         <label>Apellido: </label>
-        @Model.apellido
+        @Model.profesorone.apellido
+
     </div>
 
     <div class="form-group">
         <label>Especialidad: </label>
-        @Model.especialidad
+        @Model.profesorone.especialidad
+
     </div>
 
     <div class="form-group">

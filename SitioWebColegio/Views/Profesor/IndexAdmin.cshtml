@@ -50,9 +50,9 @@
 
 <br />
 <br />
-<button class="btn btn-primary" onclick="javascript: fnExcelReport('datatable', 'data')">Exportar a Excel</button>
+<button class='btn' style='background-color: #9f8ad0; color: white' onclick="javascript: fnExcelReport('datatable', 'data')">Exportar a Excel</button>
 
-<a class="btn btn-success" href="@Url.Content("~/Profesor/Nuevo")">Nuevo</a>
+<a class="btn" style="background-color: #5dc460; color: white" href="@Url.Content("~/Profesor/Nuevo")">Nuevo</a>
 <a class="btn btn-outline-primary float-end" href="@Url.Content("~/Profesor/Asignatura")">Asignatura</a>
 
 
@@ -93,7 +93,7 @@
 
                     {
                         "data": "idProfesor", "render": function (data) {
-                            return "<a class='btn btn-primary' href='@Url.Content("~/Profesor/DetalleProfesor?Id=")" + data + "')><i class='fas fa-eye'></i>Ver Mas</a> <a class='btn btn-warning' href='@Url.Content("~/Profesor/Editar?Id=")" + data + "')><i class='fa fa-pencil'></i> Editar</a><a class='btn btn-danger' style='margin-left:5px' onclick='return jsEliminar();' href='@Url.Content("~/Profesor/Eliminar?Id=")" + data + "')><i class='fa fa-trash'></i> Eliminar</a>";
+                            return "<a class='btn' style='background-color: #9f8ad0; color: white' href='@Url.Content("~/Profesor/DetalleProfesor?Id=")" + data + "')><i class='fas fa-eye'></i>Ver Mas</a> <a class='btn btn-warning' href='@Url.Content("~/Profesor/Editar?Id=")" + data + "')><i class='fa fa-pencil'></i> Editar</a><a class='btn btn-danger' style='margin-left:5px' onclick='return jsEliminar();' href='@Url.Content("~/Profesor/Eliminar?Id=")" + data + "')><i class='fa fa-trash'></i> Eliminar</a>";
                         },
 
 

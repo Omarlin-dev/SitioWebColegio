@@ -1,0 +1,49 @@
+﻿@model IEnumerable<SitioWebColegio.Models.Alumno>
+
+@{
+    ViewBag.Title = "AlumnosAsignaturaProfesor";
+    Layout = "~/Views/Shared/LayoutProfesor.cshtml";
+
+}
+
+<section style="margin-top: 100px;"></section>
+
+@if (Model.Count() <= 0) { 
+    <h4 class="text-center">No tienes Alumnos en esta Asignatura</h4>
+}
+else
+ {
+
+<h4 class="text-center">Alumnos Asignatura Profesor</h4>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefono)
+        </th>
+   
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telefono)
+        </td>
+ 
+    </tr>
+}
+
+</table>
+}

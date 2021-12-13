@@ -8,15 +8,15 @@
 
 <section style="margin-top: 100px;"></section>
 
-<h4 style="text-align: center;">Materias Profesor</h4>
+<h4 style="text-align: center;">Asignaturas Profesor</h4>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.nombre)
+            Nombre Asignatura
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Profesor.nombre)
+            Acciones
         </th>
         <th></th>
     </tr>
@@ -27,7 +27,7 @@
             @Html.DisplayFor(modelItem => item.nombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Profesor.nombre)
+            <a class='btn' style='background-color: #9f8ad0; color: white' href='@Url.Content("~/Profesor/AlumnosAsignaturaProfesor?Id=") + @item.idAsignatura + ' )><i class='fas fa-eye'></i>Ver Alumnos</a>
         </td>
     </tr>
 }

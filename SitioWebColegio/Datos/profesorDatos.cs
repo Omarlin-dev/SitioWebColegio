@@ -17,10 +17,10 @@ namespace SitioWebColegio.Datos
             {
                 var profesordb = db.Profesor.FirstOrDefault(d => d.idProfesor == Id);
 
-                profesor = AutoMapper.Mapper.Map<ProfesorAsignaturaViewModel>(profesordb);
+                profesor.profesorone = AutoMapper.Mapper.Map<ProfesorOnlyViewModel>(profesordb);
 
 
-                profesor.asiginaturas = AutoMapper.Mapper.Map<List<asignaturaViewModel>>(db.Asignatura.Where(d => d.idProfesor == profesor.idProfesor)).ToList();
+                profesor.asiginaturas = AutoMapper.Mapper.Map<List<asignaturaViewModel>>(db.Asignatura.Where(d => d.idProfesor == profesordb.idProfesor)).ToList();
 
                 profesor.nombreAsignatura = profesor.asiginaturas.Select(d => d.nombre).Distinct().ToList();
             }
@@ -100,6 +100,22 @@ namespace SitioWebColegio.Datos
             }
         }
 
+        public List<Alumno> GetDataAsignaturaAlumnosProfesor(int Id)
+        {
+
+            using (DBColegioEntities db = new DBColegioEntities())
+            {
+                var AlumnoAsignatura = (from asignatura in db.Asignatura.Where(d => d.idAsignatura == Id).ToList()
+                                        join asignaturaAlumno in db.AsignaturaAlumno.ToList()
+                                        on asignatura.idAsignatura equals asignaturaAlumno.idAsignatura
+                                        join alumno in db.Alumno.ToList()
+                                        on asignaturaAlumno.idAlumno equals alumno.idAlumno
+                                        select alumno).ToList();
+
+                return AlumnoAsignatura;
+            }
+        }
+
         public ProfesorAsignaturaViewModel detalleProfesorAlumno(int Id)
         {
             var profesor = new ProfesorAsignaturaViewModel();
@@ -110,7 +126,7 @@ namespace SitioWebColegio.Datos
 
                 profesor.profesorone = AutoMapper.Mapper.Map<ProfesorOnlyViewModel>(profesordb);
 
-                profesor.asignatura = db.Asignatura.FirstOrDefault(d => d.idProfesor == Id);
+                profesor.asiginatura = db.Asignatura.FirstOrDefault(d => d.idProfesor == Id);
 
             }
 

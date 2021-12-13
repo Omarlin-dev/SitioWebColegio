@@ -40,8 +40,8 @@ namespace SitioWebColegio.Controllers
 
             return View(lst);
 
-        }       
-
+        } 
+        
         [Autorizados(idOperacionadmin: 1, idOperacionProfesor: 9, idOperacionAlumno: 14)]
         public ActionResult DetalleAlumno(int Id)
         {

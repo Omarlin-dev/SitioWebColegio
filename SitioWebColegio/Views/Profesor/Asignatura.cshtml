@@ -7,7 +7,7 @@
 }
 
 <h4 class="text-center">Asignaturas Profesores</h4>
-<a class="btn btn-success" href="@Url.Content("~/Profesor/AsignaturaNuevo")">Nuevo</a>
+<a class="btn" style="background-color: #5dc460; color: white" href="@Url.Content("~/Profesor/AsignaturaNuevo")">Nuevo</a>
 
 <h2>
 
@@ -38,10 +38,10 @@
     <table class="table table-bordered table-hover w-100" id="datatable">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.nombre)
+                Nombre Asignatura
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Profesor.nombre)
+                Nombre Profesor
             </th>
             <th>Acciones</th>
 
